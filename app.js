@@ -7,6 +7,7 @@ const pageNav = document.getElementById("pageNav");
 const startBtn = document.getElementById("startBtn");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
 
@@ -173,12 +174,27 @@ function renderPage() {
 showStart();
 
 startBtn.onclick = () => {
+  // === เล่นเพลง (ผ่าน iOS Safari แน่นอน) ===
+  bgm.volume = 0;
+  bgm.play().catch(() => {});
+
+  let v = 0;
+  const fadeIn = setInterval(() => {
+    v += 0.02;
+    if (v >= 1) {
+      bgm.volume = 1;
+      clearInterval(fadeIn);
+    } else {
+      bgm.volume = v;
+    }
+  }, 100);
+
+  // === logic เดิมของคุณ ===
   pageIndex = 0;
   startNav.classList.add("hidden");
   pageNav.classList.remove("hidden");
   renderPage();
 };
-
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
