@@ -15,14 +15,13 @@ html, body {
 .ios-bg {
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      #7c6cff 0%,
-      #8c6bff 35%,
-      #6f6bff 55%,
-      #2a2348 100%
-    );
+  background: linear-gradient(
+    180deg,
+    #7c6cff 0%,
+    #8c6bff 35%,
+    #6f6bff 55%,
+    #2a2348 100%
+  );
   z-index: -1;
 }
 
@@ -42,10 +41,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding:
-    env(safe-area-inset-top)
-    16px
-    env(safe-area-inset-bottom);
+  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
 }
 
 /* ===== Card ===== */
@@ -68,8 +64,12 @@ html, body {
     inset 0 0 0 1px rgba(255,255,255,.55),
     0 20px 60px rgba(0,0,0,.35);
 
-  /* ⭐ สำคัญ */
-  transition: opacity 3s ease, transform 3s ease;
+  opacity: 1;
+  transition: opacity 3s ease;
+}
+
+.card.fade {
+  opacity: 0;
 }
 
 /* ===== Text ===== */
@@ -110,15 +110,4 @@ html, body {
 .btn.ghost {
   background: rgba(255,255,255,.3);
   color: #fff;
-}
-
-/* ===== Fade states ===== */
-.fade-out {
-  opacity: 0;
-  transform: translateY(12px);
-}
-
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
 }
