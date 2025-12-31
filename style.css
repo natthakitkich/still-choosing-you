@@ -4,34 +4,31 @@ html, body {
   margin: 0;
   height: 100%;
   font-family: "IBM Plex Thai", sans-serif;
-  background: #0b0d12;
+  background: #0a0c12;
   color: #f5f7fa;
 }
 
-/* Background */
 .bg {
   position: fixed;
   inset: 0;
   background:
     radial-gradient(circle at top right, #2b1a3a, transparent 60%),
-    radial-gradient(circle at bottom left, #0f2a3d, transparent 60%),
-    #0b0d12;
+    radial-gradient(circle at bottom left, #102a44, transparent 60%),
+    #0a0c12;
 }
 
 .vignette {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.6));
+  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.7));
 }
 
-/* Card */
-#card {
+#app {
   height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
-/* Pages */
 .page {
   position: absolute;
   inset: 0;
@@ -43,49 +40,38 @@ html, body {
 
 .page.active {
   display: flex;
-  animation: fadeUp 0.9s cubic-bezier(.2,.8,.2,1);
+  animation: fade 0.9s ease;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Glass card */
-.glass {
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.08);
-  border-radius: 24px;
-  padding: 36px 28px;
+.card {
   max-width: 520px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  width: 100%;
+  padding: 36px 28px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   text-align: center;
 }
 
-.glass p {
+.card p {
   font-size: 1.05rem;
   line-height: 2;
+  white-space: pre-line;
 }
 
-.cover h1 {
+h1 {
   font-size: 1.4rem;
   margin-bottom: 8px;
 }
 
-.emphasis p {
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-
-.ending span {
-  display: block;
-  margin-top: 24px;
-  opacity: 0.6;
-}
-
-/* Buttons */
-#startBtn {
-  margin-top: 32px;
+button {
+  margin-top: 28px;
   padding: 14px 32px;
   border-radius: 999px;
   border: none;
@@ -94,13 +80,9 @@ html, body {
   font-size: 0.95rem;
 }
 
-#nextBtn {
+.hint {
   position: absolute;
   bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: none;
-  border: none;
   color: #9fbfff;
   font-size: 0.85rem;
 }
