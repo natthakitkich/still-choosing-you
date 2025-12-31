@@ -1,70 +1,77 @@
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "IBM Plex Thai", sans-serif;
-  background: radial-gradient(circle at top, #1c2040, #070a14);
-  color: #ffffff;
+  height: 100%;
+  font-family: 'IBM Plex Thai', sans-serif;
+  background: radial-gradient(circle at top, #1b2235, #05070c);
+  color: #f5f7ff;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
 }
 
 .screen {
-  min-height: 100svh;
+  position: fixed;
+  inset: 0;
   display: none;
-  justify-content: center;
   align-items: center;
-  padding: 32px;
+  justify-content: center;
+  padding: 48px 28px;
   text-align: center;
+  opacity: 0;
+  transition: opacity .6s ease;
 }
 
 .screen.active {
   display: flex;
+  opacity: 1;
 }
 
-.card {
+.screen p {
+  font-size: 1.05rem;
+  line-height: 1.9;
   max-width: 520px;
-  width: 100%;
-  padding: 36px 28px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
 }
 
-h1 {
-  margin: 0 0 8px;
+.emphasis p {
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
-p {
-  margin: 0;
-  line-height: 1.8;
+.card {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(24px);
+  border-radius: 24px;
+  padding: 36px 28px;
+}
+
+.card h1 {
+  margin: 0 0 8px;
 }
 
 button {
-  margin-top: 28px;
-  padding: 14px 36px;
+  margin-top: 24px;
+  padding: 14px 28px;
   border-radius: 999px;
   border: none;
-  background: #ffffff;
-  color: #000;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  background: white;
+  color: black;
 }
 
-#story {
-  flex-direction: column;
-}
-
-#text {
-  max-width: 520px;
-  white-space: pre-line;
-  line-height: 2;
-  font-size: 1.05rem;
-}
-
-.hint {
-  margin-top: 28px;
-  font-size: 0.85rem;
-  opacity: 0.6;
+#tapHint {
+  position: fixed;
+  bottom: 28px;
+  width: 100%;
+  text-align: center;
+  font-size: .9rem;
+  opacity: .6;
 }
