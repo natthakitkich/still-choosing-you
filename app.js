@@ -10,9 +10,9 @@ const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
-let isFading = false;
+let isTransitioning = false;
 
-/* ===== ข้อความจดหมาย (ต้นฉบับครบ) ===== */
+/* ===== ข้อความจดหมาย (ครบ 100%) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -93,18 +93,18 @@ function showStart() {
   nextBtn.textContent = "ถัดไป";
 }
 
-/* ===== Fade เปลี่ยนหน้า (3s) ===== */
-function fadeTo(text) {
-  if (isFading) return;
-  isFading = true;
+/* ===== เปลี่ยนหน้า (เฟดแบบเดิม + เว้น 3 วิ) ===== */
+function changePage(text) {
+  if (isTransitioning) return;
+  isTransitioning = true;
 
-  card.classList.add("fade");
+  card.classList.add("hidden");
 
   setTimeout(() => {
     content.textContent = text;
-    card.classList.remove("fade");
-    setTimeout(() => isFading = false, 3000);
-  }, 300);
+    card.classList.remove("hidden");
+    isTransitioning = false;
+  }, 3000);
 }
 
 /* ===== Init ===== */
@@ -124,15 +124,16 @@ startBtn.onclick = () => {
   pageIndex = 0;
   startNav.classList.add("hidden");
   pageNav.classList.remove("hidden");
-  fadeTo(pages[pageIndex]);
+  changePage(pages[pageIndex]);
 };
 
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
-    fadeTo(pages[pageIndex]);
-    nextBtn.textContent =
-      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+    changePage(pages[pageIndex]);
+    if (pageIndex === pages.length - 1) {
+      nextBtn.textContent = "จบแล้ว";
+    }
   } else {
     showStart();
   }
@@ -141,7 +142,7 @@ nextBtn.onclick = () => {
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
-    fadeTo(pages[pageIndex]);
     nextBtn.textContent = "ถัดไป";
+    changePage(pages[pageIndex]);
   }
 };
