@@ -10,9 +10,8 @@ const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
-let isTransitioning = false;
 
-/* ===== ข้อความต้นฉบับ 100% (ไม่แตะ) ===== */
+/* ===== ข้อความต้นฉบับ 100% (ไม่ตัด ไม่แก้) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -141,8 +140,9 @@ Still choosing you…
 
 const pages = rawText.trim().split(/\n\s*\n/);
 
-/* ===== หน้าเปิด ===== */
+/* ===== หน้าแรก ===== */
 function showStart() {
+  pageIndex = -1;
   content.textContent =
 `การ์ดใบนี้
 เขียนถึงคนคนเดียว
@@ -153,31 +153,27 @@ function showStart() {
   pageNav.classList.add("hidden");
 }
 
-/* ===== Render + Fade (แก้ค้าง) ===== */
+/* ===== เฟดแบบ Safari-safe ===== */
 function renderPage() {
-  if (isTransitioning) return;
-  isTransitioning = true;
-
   card.classList.remove("fade-in");
   card.classList.add("fade-out");
 
-  setTimeout(() => {
-    content.textContent = pages[pageIndex];
-
-    card.classList.remove("fade-out");
-    card.classList.add("fade-in");
-
+  requestAnimationFrame(() => {
     setTimeout(() => {
-      isTransitioning = false;
-    }, 450);
-  }, 300);
+      content.textContent = pages[pageIndex];
+
+      card.classList.remove("fade-out");
+      card.classList.add("fade-in");
+    }, 280);
+  });
 }
 
 /* ===== Start ===== */
 showStart();
 
 startBtn.onclick = () => {
-  if (bgm) {
+  // เล่นเพลง (ไม่แตะ logic เดิม)
+  if (bgm && bgm.paused) {
     bgm.volume = 0;
     bgm.play().then(() => {
       let v = 0;
@@ -199,6 +195,9 @@ nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
     renderPage();
+  } else {
+    // === จบแล้ว กลับหน้าแรก ===
+    showStart();
   }
 };
 
