@@ -1,3 +1,6 @@
+/* ===============================
+   ELEMENTS
+=============================== */
 const content = document.getElementById("content");
 const card = document.getElementById("card");
 
@@ -9,13 +12,15 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
+/* ===============================
+   STATE
+=============================== */
 let pageIndex = -1;
+let isAnimating = false;
 
 /* ===============================
-   ข้อความต้นฉบับ 100%
-   แยกหน้าตาม ENTER ของผู้ใช้
-   =============================== */
-
+   TEXT (100% ORIGINAL – NO CUT)
+=============================== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -141,14 +146,13 @@ Still choosing you…
 นักการทูตคนเก่งของชั้น
 `;
 
-/* ===== แยกหน้า: 1 paragraph = 1 หน้า ===== */
 const pages = rawText.trim().split(/\n\s*\n/);
 
-/* ===== หน้าแรก ===== */
+/* ===============================
+   START SCREEN
+=============================== */
 function showStart() {
-  card.classList.remove("fade-out");
-  card.classList.add("fade-in");
-
+  pageIndex = -1;
   content.textContent =
 `การ์ดใบนี้
 เขียนถึงคนคนเดียว
@@ -159,49 +163,50 @@ function showStart() {
   pageNav.classList.add("hidden");
 }
 
-/* ===== Render page (fade 3 วินาที) ===== */
-
+/* ===============================
+   RENDER WITH TRUE FADE (iOS SAFE)
+=============================== */
 function renderPage() {
-  // 1. ล้างสถานะเดิมทั้งหมด (กัน Safari ค้าง state)
-  card.classList.remove("fade-in", "fade-out");
+  if (isAnimating) return;
+  isAnimating = true;
 
-  // 2. บังคับ reflow ให้ Safari paint จริง
+  // reset classes
+  card.classList.remove("fade-in", "fade-out");
   void card.offsetHeight;
 
-  // 3. เริ่ม fade-out
+  // fade out
   card.classList.add("fade-out");
 
-  // 4. รอให้ Safari register fade-out
   setTimeout(() => {
-    // เปลี่ยนข้อความหลังเริ่ม fade-out แล้ว
     content.textContent = pages[pageIndex];
 
-    // 5. reset อีกครั้งก่อน fade-in
     card.classList.remove("fade-out");
     void card.offsetHeight;
 
-    // 6. fade-in
     card.classList.add("fade-in");
 
-    // 7. เปลี่ยนข้อความปุ่มหน้าสุดท้าย
     nextBtn.textContent =
       pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 
-  }, 100); // delay สั้น ๆ แต่จำเป็นมากสำหรับ iOS Safari
+    setTimeout(() => {
+      isAnimating = false;
+    }, 3000);
+
+  }, 100);
 }
 
-/* ===== Init ===== */
+/* ===============================
+   EVENTS
+=============================== */
 showStart();
 
-/* ===== Events ===== */
 startBtn.onclick = () => {
-  // เล่นเพลง (ผ่าน iOS Safari)
+  // iOS Safari autoplay safe
   bgm.volume = 0;
   bgm.play().catch(() => {});
-
   let v = 0;
   const fadeIn = setInterval(() => {
-    v += 0.02;
+    v += 0.05;
     bgm.volume = Math.min(v, 1);
     if (v >= 1) clearInterval(fadeIn);
   }, 100);
@@ -217,7 +222,6 @@ nextBtn.onclick = () => {
     pageIndex++;
     renderPage();
   } else {
-    pageIndex = -1;
     showStart();
   }
 };
