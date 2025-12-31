@@ -5,134 +5,95 @@
 
 html, body {
   margin: 0;
-  padding: 0;
   height: 100%;
-  font-family: 'LINE Seed Sans TH', -apple-system, BlinkMacSystemFont;
-  background: #05060a;
+  font-family: 'LINE Seed Sans TH', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #05070f;
   color: #fff;
-  overflow: hidden;
 }
 
-/* Background */
 .bg {
   position: fixed;
   inset: 0;
-  background: radial-gradient(1200px at 20% 20%, #3a4cff55, transparent 60%),
-              radial-gradient(1200px at 80% 80%, #8a3aff55, transparent 60%),
-              linear-gradient(180deg, #060914, #05060a);
-  animation: bgMove 18s ease-in-out infinite alternate;
+  background:
+    radial-gradient(1200px at 20% 10%, #6b5cff55, transparent 60%),
+    radial-gradient(900px at 80% 30%, #ff5fa255, transparent 60%),
+    radial-gradient(800px at 50% 80%, #2bd9ff44, transparent 60%),
+    linear-gradient(180deg, #060818, #02030a);
+  animation: drift 18s ease-in-out infinite alternate;
   z-index: -1;
 }
 
-@keyframes bgMove {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(15deg); }
+@keyframes drift {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(12deg); }
 }
 
-/* Screens */
-.screen {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-
-.screen.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Glass card */
-.glass-card {
-  width: min(90%, 420px);
-  padding: 36px 28px;
+.card {
+  width: min(92vw, 420px);
+  margin: auto;
+  margin-top: 18vh;
+  padding: 32px 28px;
   border-radius: 28px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(36px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    0 30px 80px rgba(0,0,0,0.5);
   text-align: center;
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-/* Typography */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 h1 {
-  margin: 0;
   font-weight: 600;
   font-size: 28px;
+  margin-bottom: 8px;
 }
 
 .subtitle {
-  margin-top: 10px;
-  font-size: 16px;
-  opacity: 0.75;
+  opacity: .8;
+  margin-bottom: 28px;
 }
 
-/* Buttons */
-button {
-  border: none;
-  outline: none;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.primary-btn {
-  margin-top: 28px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-size: 16px;
-  font-weight: 500;
-  background: rgba(255,255,255,0.95);
-  color: #111;
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-
-.primary-btn:active {
-  transform: scale(0.96);
-}
-
-/* Letter */
-.letter-card {
-  text-align: center;
-}
-
-.letter-text {
-  min-height: 200px;
+#text {
   font-size: 17px;
   line-height: 1.8;
   white-space: pre-line;
-  opacity: 0;
-  filter: blur(6px);
-  transition: opacity 0.6s ease, filter 0.6s ease;
+  min-height: 260px;
+  margin-bottom: 28px;
 }
 
-.letter-text.show {
-  opacity: 1;
-  filter: blur(0);
-}
-
-/* Navigation */
 .nav {
-  margin-top: 30px;
   display: flex;
-  justify-content: space-between;
   gap: 12px;
 }
 
-.nav-btn {
+button {
   flex: 1;
-  padding: 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  font-size: 14px;
+  padding: 14px 0;
+  border-radius: 18px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.nav-btn.primary {
+.primary {
   background: rgba(255,255,255,0.9);
-  color: #111;
+  color: #000;
+}
+
+.secondary {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
 }
