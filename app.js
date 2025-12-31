@@ -11,7 +11,7 @@ const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
 
-/* ===== ข้อความต้นฉบับ 100% (ไม่ตัด ไม่แก้) ===== */
+/* ===== ข้อความต้นฉบับ 100% (ไม่แตะ ไม่ตัด) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -153,7 +153,7 @@ function showStart() {
   pageNav.classList.add("hidden");
 }
 
-/* ===== เฟดแบบ Safari-safe ===== */
+/* ===== เฟดช้า นุ่ม ~2 วิ ===== */
 function renderPage() {
   card.classList.remove("fade-in");
   card.classList.add("fade-out");
@@ -162,9 +162,16 @@ function renderPage() {
     setTimeout(() => {
       content.textContent = pages[pageIndex];
 
+      // ปรับข้อความปุ่ม
+      if (pageIndex === pages.length - 1) {
+        nextBtn.textContent = "จบแล้ว";
+      } else {
+        nextBtn.textContent = "ถัดไป";
+      }
+
       card.classList.remove("fade-out");
       card.classList.add("fade-in");
-    }, 280);
+    }, 2000);
   });
 }
 
@@ -172,7 +179,6 @@ function renderPage() {
 showStart();
 
 startBtn.onclick = () => {
-  // เล่นเพลง (ไม่แตะ logic เดิม)
   if (bgm && bgm.paused) {
     bgm.volume = 0;
     bgm.play().then(() => {
@@ -196,7 +202,6 @@ nextBtn.onclick = () => {
     pageIndex++;
     renderPage();
   } else {
-    // === จบแล้ว กลับหน้าแรก ===
     showStart();
   }
 };
