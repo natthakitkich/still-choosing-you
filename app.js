@@ -11,7 +11,11 @@ const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
 
-/* ===== ข้อความ (ของคุณครบ 100%) ===== */
+/* ===============================
+   ข้อความต้นฉบับ 100%
+   แยกหน้าตาม ENTER ของผู้ใช้
+   =============================== */
+
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -137,10 +141,14 @@ Still choosing you…
 นักการทูตคนเก่งของชั้น
 `;
 
+/* ===== แยกหน้า: 1 paragraph = 1 หน้า ===== */
 const pages = rawText.trim().split(/\n\s*\n/);
 
 /* ===== หน้าแรก ===== */
 function showStart() {
+  card.classList.remove("fade-out");
+  card.classList.add("fade-in");
+
   content.textContent =
 `การ์ดใบนี้
 เขียนถึงคนคนเดียว
@@ -149,33 +157,36 @@ function showStart() {
 
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
-  card.classList.remove("fade-out");
-  card.classList.add("fade-in");
 }
 
-/* ===== Render with 3s fade ===== */
+/* ===== Render page (fade 3 วินาที) ===== */
 function renderPage() {
   card.classList.remove("fade-in");
   card.classList.add("fade-out");
 
-  setTimeout(() => {
-    content.textContent = pages[pageIndex];
+  // บังคับให้ Safari รับรู้ transition
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      content.textContent = pages[pageIndex];
 
-    card.classList.remove("fade-out");
-    card.classList.add("fade-in");
+      card.classList.remove("fade-out");
+      card.classList.add("fade-in");
 
-    nextBtn.textContent =
-      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-  }, 3000);
+      nextBtn.textContent =
+        pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+    }, 50);
+  });
 }
 
 /* ===== Init ===== */
 showStart();
 
+/* ===== Events ===== */
 startBtn.onclick = () => {
-  // เพลง (ไม่กระทบของเดิม)
+  // เล่นเพลง (ผ่าน iOS Safari)
   bgm.volume = 0;
   bgm.play().catch(() => {});
+
   let v = 0;
   const fadeIn = setInterval(() => {
     v += 0.02;
