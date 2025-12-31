@@ -1,4 +1,9 @@
 const pages = [
+`การ์ดใบนี้
+เขียนถึงคนคนเดียว
+
+กดเพื่อเปิดการ์ดปีใหม่`,
+
 `สวัสดีปีใหม่นะงับที่รัก`,
 
 `ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
@@ -91,12 +96,13 @@ const pages = [
 
 `เห็นอนาคตที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น`,
 
-`เหมือนเพลงที่เราเขียน`,
+`เหมือนเพลงที่เราเขียน
 
-`Still Choosing You…`,
+Still Choosing You…`,
 
-`เรายังเลือกเธอ
-วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
+`เรายังเลือกเธอ`,
+
+`วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
 
 `หน้าเราก็ยังเลือกเธอนะ`,
 
@@ -124,33 +130,27 @@ const pages = [
 ];
 
 let index = 0;
+const card = document.getElementById("card");
 const content = document.getElementById("content");
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 
 function render() {
-  content.classList.remove("show");
-  setTimeout(() => {
-    content.textContent = pages[index];
-    content.classList.add("show");
-
-    prev.style.visibility = index === 0 ? "hidden" : "visible";
-    next.textContent = index === 0 ? "เปิดการ์ดปีใหม่" : "ถัดไป";
-  }, 700);
+  content.textContent = pages[index];
+  prev.style.visibility = index === 0 ? "hidden" : "visible";
+  next.textContent = index === 0 ? "เปิดการ์ด" : (index === pages.length - 1 ? "จบแล้ว" : "ถัดไป");
 }
 
-prev.onclick = () => {
-  if (index > 0) {
-    index--;
+function transition(to) {
+  card.classList.add("fade-out");
+  setTimeout(() => {
+    index = to;
     render();
-  }
-};
+    card.classList.remove("fade-out");
+  }, 900);
+}
 
-next.onclick = () => {
-  if (index < pages.length - 1) {
-    index++;
-    render();
-  }
-};
+prev.onclick = () => index > 0 && transition(index - 1);
+next.onclick = () => index < pages.length - 1 ? transition(index + 1) : transition(0);
 
 render();
