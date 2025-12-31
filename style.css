@@ -5,7 +5,6 @@
 
 html, body {
   margin: 0;
-  padding: 0;
   height: 100%;
   font-family: "Noto Sans Thai", -apple-system, system-ui, sans-serif;
   color: #fff;
@@ -13,28 +12,27 @@ html, body {
   overflow: hidden;
 }
 
-/* ===== Background ===== */
+/* ===== Liquid iOS26 Background ===== */
 .liquid-bg {
   position: fixed;
-  inset: -30%;
+  inset: -25%;
   background:
-    radial-gradient(800px at 15% 20%, #6a5cff 0%, transparent 60%),
-    radial-gradient(700px at 85% 30%, #b46bff 0%, transparent 60%),
-    radial-gradient(600px at 50% 80%, #3dd6c6 0%, transparent 65%),
-    linear-gradient(180deg, #0b1020, #05060f);
+    radial-gradient(800px at 15% 10%, #6a5cff 0%, transparent 55%),
+    radial-gradient(700px at 85% 30%, #b65cff 0%, transparent 60%),
+    radial-gradient(600px at 50% 80%, #ff4fd8 0%, transparent 65%),
+    linear-gradient(180deg, #0a0c1c, #04050a);
   filter: blur(60px) saturate(160%);
-  z-index: -3;
+  z-index: -2;
 }
 
-/* ===== Dust layer ===== */
+/* ===== Dust ===== */
 #dust {
   position: fixed;
   inset: 0;
-  z-index: -1;              /* 🔴 จุดสำคัญ */
-  pointer-events: none;
+  z-index: -1;
 }
 
-/* ===== Stage ===== */
+/* ===== Layout ===== */
 .stage {
   min-height: 100svh;
   display: flex;
@@ -44,37 +42,33 @@ html, body {
     env(safe-area-inset-top)
     16px
     env(safe-area-inset-bottom);
-  position: relative;
-  z-index: 1;
 }
 
-/* ===== Card ===== */
+/* ===== Glass Card ===== */
 .card {
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
   padding: 34px 24px 26px;
-  border-radius: 32px;
+  border-radius: 30px;
 
+  /* tint สำคัญมาก */
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.38),
-      rgba(255,255,255,0.12)
+      rgba(160,140,255,0.45),
+      rgba(120,90,200,0.25)
     );
 
-  backdrop-filter: blur(70px) saturate(200%);
-  -webkit-backdrop-filter: blur(70px) saturate(200%);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.55),
-    inset 0 12px 26px rgba(255,255,255,0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    inset 0 12px 28px rgba(255,255,255,0.18),
     0 40px 90px rgba(0,0,0,0.7);
 
   position: relative;
-  z-index: 2;               /* 🔴 สำคัญมาก */
-  overflow: hidden;
-
-  transition: opacity .9s ease, transform .9s ease, filter .9s ease;
+  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
 }
 
 /* Glow edge */
@@ -85,17 +79,17 @@ html, body {
   border-radius: inherit;
   background: linear-gradient(
     120deg,
-    rgba(255,255,255,0.8),
+    rgba(255,255,255,0.6),
     rgba(255,255,255,0.15),
-    rgba(255,255,255,0.8)
+    rgba(255,255,255,0.6)
   );
-  opacity: .35;
+  opacity: .4;
   pointer-events: none;
 }
 
 /* ===== Text ===== */
 .content {
-  font-size: 16.5px;
+  font-size: 16px;
   line-height: 1.9;
   text-align: center;
   white-space: pre-line;
@@ -118,9 +112,8 @@ html, body {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .btn.primary {
@@ -133,6 +126,11 @@ html, body {
   color: #fff;
 }
 
+.btn:active {
+  transform: scale(.96);
+}
+
+/* ===== Transition ===== */
 .fade-out {
   opacity: 0;
   transform: translateY(10px);
