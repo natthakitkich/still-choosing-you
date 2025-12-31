@@ -2,75 +2,37 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Still choosing you</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Background layers -->
   <div class="bg"></div>
   <div class="vignette"></div>
 
-  <!-- Audio (iOS Safari safe: triggered ONLY by user click) -->
   <audio id="bgMusic" preload="auto" playsinline>
     <source src="music/still-choosing-you.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Card -->
-  <main id="card">
+  <main id="app">
 
-    <!-- COVER -->
-    <section class="page active cover">
-      <div class="glass">
+    <!-- หน้าแรก -->
+    <div class="page active" id="cover">
+      <div class="card">
         <h1>การ์ดใบนี้</h1>
         <p>เขียนถึงคนคนเดียว</p>
         <button id="startBtn">เปิดการ์ดปีใหม่</button>
       </div>
-    </section>
+    </div>
 
-    <!-- CONTENT (ข้อความเดิมครบ) -->
-    <section class="page"><div class="glass"><p>สวัสดีปีใหม่นะงับที่รัก</p></div></section>
-
-    <section class="page"><div class="glass"><p>
-      ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ<br>
-      และเราอยากบอกเธอจากใจว่า คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ
-    </p></div></section>
-
-    <section class="page"><div class="glass"><p>
-      ถ้ามองย้อนกลับไปเธอคือคนแรก และเป็นคนเดียวที่ทำให้เรากลับมามีพลังใจ มีรอยยิ้ม
-      และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนี้
-    </p></div></section>
-
-    <section class="page"><div class="glass"><p>
-      เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
-      กลับมาดีขึ้นได้ขนาดนี้
-    </p></div></section>
-
-    <section class="page"><div class="glass"><p>
-      มันเหมือนหัวใจที่เคยพังทลายและสูญเสียตัวตน
-      มันค่อย ๆ ฟื้นตัวและกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
-      และรู้สึกว่ามันดีกับตัวเราและคนรอบข้าง
-    </p></div></section>
-
-    <section class="page"><div class="glass"><p>
-      ซึ่งทั้งหมดนี้ เราพูดได้เต็มปากว่ามันเกิดขึ้นเพราะมีเธออยู่ตรงนี้…ข้าง ๆ เรา
-      ไม่ว่าที่ผ่านมาเราจะทำตัวแย่แค่ไหน แต่เธอก็ยังไม่ปล่อยมือเรา
-    </p></div></section>
-
-    <section class="page emphasis"><div class="glass"><p>Still choosing you…</p></div></section>
-
-    <section class="page ending"><div class="glass">
-      <p>สวัสดีปีใหม่นะงับ<br>เรารักเธอนะ นักการทูตคนเก่งของผม</p>
-      <span>— Bubee</span>
-    </div></section>
-
-    <button id="nextBtn">แตะเพื่อไปต่อ</button>
+    <!-- หน้าเนื้อหา (JS จะสร้างทั้งหมด) -->
+    <div class="page" id="content">
+      <div class="card" id="textBox"></div>
+      <div class="hint">แตะเพื่อไปต่อ</div>
+    </div>
 
   </main>
 
