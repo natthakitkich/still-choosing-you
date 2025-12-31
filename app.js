@@ -1,4 +1,4 @@
-const texts = [
+const pages = [
 `สวัสดีปีใหม่นะงับที่รัก`,
 
 `ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
@@ -8,15 +8,15 @@ const texts = [
 `ถ้ามองย้อนกลับไปเธอคือคนแรก
 และเป็นคนเดียวที่ทำให้เรากลับมามีพลังใจ
 มีรอยยิ้ม
-และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนึ้`,
+และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนี้`,
 
 `เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
 กลับมาดีขึ้นได้ขนาดนี้
 
-มันเหมือนหัวใจที่เคยพังทขาย
-และสูญเสียตัวตตน
+มันเหมือนหัวใจที่เคยพังทลาย
+และสูญเสียตัวตน
 มันค่อย ๆ ฟื้นตัว
-และกลับมาเป็นเราในเวอร์ชั่นที่เราภูมิใจ
+และกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
 และรู้สึกว่ามันดีกับตัวเราและคนรอบข้าง`,
 
 `ซึ่งทั้งหมดนี้
@@ -25,7 +25,7 @@ const texts = [
 แต่เธอก็ยังไม่ปล่อยมือเรา`,
 
 `ปีนี้เราเดินมาด้วยกันหลายช่วงเวลามาก
-เดือนมีนาคมมัรยังชัดอยู่ในความทรงจำของเรา
+เดือนมีนาคมมันยังชัดอยู่ในความทรงจำของเรา
 วันที่เธอบินมาหาเราตามสัญญาที่เคยให้กันไว้`,
 
 `วันเกิดปีนี้ของเราทั้งคู่
@@ -64,7 +64,7 @@ const texts = [
 คนเรามีวันที่พลาด
 วันที่อ่อนแอกันได้`,
 
-`แต่สิ่งนึงที่เราอยากบอกเธอให้ชัดที่สุดคือ
+`แต่สิ่งหนึ่งที่เราอยากบอกเธอให้ชัดที่สุดคือ
 แม้จะมีวันที่ยากสำหรับเรา
 แต่เราก็ยังเลือกเธอนะ
 และเราก็ผ่านมาได้ด้วยกันแล้ว`,
@@ -113,8 +113,7 @@ Still choosing you…
 `เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
 ขอบคุณที่รักเรา
 ขอบคุณที่อยู่ข้างกัน
-และขอบคุณ
-ที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
+และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
 
 `สวัสดีปีใหม่นะงับ
 เรารักเธอนะ
@@ -123,21 +122,26 @@ Still choosing you…
 
 const stage = document.getElementById("stage");
 let index = 0;
+let locked = false;
 
-function showNext() {
-  const current = document.querySelector(".scene.active");
-  if (current) current.classList.remove("active");
+function showPage() {
+  if (locked || index >= pages.length) return;
+  locked = true;
 
-  if (index >= texts.length) return;
+  stage.innerHTML = "";
 
   const scene = document.createElement("div");
   scene.className = "scene";
-  scene.innerHTML = `<p>${texts[index].replace(/\n/g,"<br>")}</p>`;
+  scene.textContent = pages[index];
   stage.appendChild(scene);
 
-  requestAnimationFrame(() => scene.classList.add("active"));
+  requestAnimationFrame(() => {
+    scene.classList.add("active");
+    setTimeout(() => locked = false, 900);
+  });
+
   index++;
 }
 
-document.body.addEventListener("click", showNext);
-document.body.addEventListener("touchstart", showNext, { passive: true });
+// ใช้แค่อันเดียว ป้องกันเด้ง 2 หน้า
+document.addEventListener("pointerdown", showPage);
