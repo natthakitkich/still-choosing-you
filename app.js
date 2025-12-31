@@ -1,3 +1,4 @@
+const content = document.getElementById("content");
 const card = document.getElementById("card");
 
 const startNav = document.getElementById("startNav");
@@ -8,19 +9,10 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
-const layerA = document.getElementById("contentA");
-const layerB = document.getElementById("contentB");
-
-let activeLayer = layerA;
-let inactiveLayer = layerB;
-
 let pageIndex = -1;
-let isAnimating = false;
+let isFading = false;
 
-/* ===============================
-   ข้อความจดหมาย (ต้นฉบับผู้ใช้ 100%)
-   แยกหน้าตาม ENTER
-=============================== */
+/* ===== ข้อความจดหมาย (ต้นฉบับครบ) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -81,134 +73,64 @@ const rawText = `
 
 และเราภูมิใจในตัวเองมาก ที่เราทำตามสัญญานั้นได้
 
-ขอบคุณเธอที่เป็นแรงผลักดัน เป็นกำลังใจ
-และเป็นเหตุผลที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้
-
-แต่แน่นอนว่าปีนี้ไม่ได้มีแค่ช่วงเวลาที่ราบรื่นทั้งหมด
-
-คนเรามีวันที่พลาด วันที่อ่อนแอกันได้
-
-แต่สิ่งนึงที่เราอยากบอกเธอให้ชัดที่สุดคือ
-
-แม้จะมีวันที่ยากสำหรับเรา 
-
-แต่เราก็ยังเลือกเธอนะ
-
-และเราก็ผ่านมาได้ด้วยกันแล้ว
-
-เราอยากทิ้งทุกเรื่องที่หนักใจ ทุกความผิดพลาดไว้ในปีที่ผ่านมา 
-
-แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่ 
-
-ด้วยหัวใจที่เรียนรู้ 
-
-เติบโต และเข้าใจกันมากขึ้น
-
 เรารักเธอมาก
 รักเธอที่สุด
-
-และการที่เรายังเลือกเธออยู่ตรงนี้
-ไม่ใช่เพราะมันง่าย ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
-
-แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
-เราเห็นภาพของชีวิตคู่ของเรา
-
-เห็นอนาคตที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น
-
-เหมือนเพลงที่เราเขียน
-
-Still choosing you…
-
-เรายังเลือกเธอ
-
-วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้างหน้า
-
-เราก็ยังเลือกเธอนะ
-
-สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่
-ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ
-
-และถ้าวันไหนต้องเจอเรื่องไม่ดี ก็ขอให้เรายังจับมือกันแน่น ๆ
-และก้าวข้ามมันไปด้วยกัน
-เหมือนที่เราเคยพูด เคยตั้งใจ และเคยสัญญากันไว้
-
-เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
-
-ขอบคุณที่รักเรา
-
-ขอบคุณที่อยู่ข้างกัน
-
-และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
-
-สวัสดีปีใหม่นะงับ
-เรารักเธอนะ 
 
 นักการทูตคนเก่งของชั้น
 `;
 
 const pages = rawText.trim().split(/\n\s*\n/);
 
-/* ===============================
-   หน้าเปิดการ์ด
-=============================== */
+/* ===== หน้าแรก ===== */
 function showStart() {
   pageIndex = -1;
-  activeLayer.textContent =
-`การ์ดใบนี้
+  content.textContent = `การ์ดใบนี้
 เขียนถึงคนคนเดียว
 
 กดเพื่อเปิดอ่านการ์ด`;
-
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
   nextBtn.textContent = "ถัดไป";
 }
 
-/* ===============================
-   Cinematic Crossfade (3s)
-=============================== */
-function crossfadeTo(text) {
-  if (isAnimating) return;
-  isAnimating = true;
+/* ===== Fade เปลี่ยนหน้า (3s) ===== */
+function fadeTo(text) {
+  if (isFading) return;
+  isFading = true;
 
-  inactiveLayer.textContent = text;
-  inactiveLayer.classList.add("active");
-  activeLayer.classList.remove("active");
-
-  [activeLayer, inactiveLayer] = [inactiveLayer, activeLayer];
+  card.classList.add("fade");
 
   setTimeout(() => {
-    isAnimating = false;
-  }, 3000);
+    content.textContent = text;
+    card.classList.remove("fade");
+    setTimeout(() => isFading = false, 3000);
+  }, 300);
 }
 
-/* ===============================
-   Events
-=============================== */
+/* ===== Init ===== */
 showStart();
 
+/* ===== Events ===== */
 startBtn.onclick = () => {
-  // iOS Safari autoplay-safe
   bgm.volume = 0;
   bgm.play().catch(() => {});
-
   let v = 0;
-  const fade = setInterval(() => {
+  const fadeAudio = setInterval(() => {
     v += 0.05;
     bgm.volume = Math.min(v, 1);
-    if (v >= 1) clearInterval(fade);
+    if (v >= 1) clearInterval(fadeAudio);
   }, 100);
 
   pageIndex = 0;
   startNav.classList.add("hidden");
   pageNav.classList.remove("hidden");
-  crossfadeTo(pages[pageIndex]);
+  fadeTo(pages[pageIndex]);
 };
 
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
-    crossfadeTo(pages[pageIndex]);
+    fadeTo(pages[pageIndex]);
     nextBtn.textContent =
       pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
   } else {
@@ -219,7 +141,7 @@ nextBtn.onclick = () => {
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
-    crossfadeTo(pages[pageIndex]);
+    fadeTo(pages[pageIndex]);
     nextBtn.textContent = "ถัดไป";
   }
 };
