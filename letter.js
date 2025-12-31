@@ -116,26 +116,34 @@ Still Choosing You…
 ];
 
 let index = 0;
-const content = document.getElementById("content");
-const next = document.getElementById("next");
-const prev = document.getElementById("prev");
+const textEl = document.getElementById("text");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
 function render() {
-  content.classList.remove("show");
+  textEl.classList.remove("show");
   setTimeout(() => {
-    content.textContent = pages[index];
-    content.classList.add("show");
+    textEl.textContent = pages[index];
+    textEl.classList.add("show");
+    prevBtn.disabled = index === 0;
+    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
   }, 200);
 }
 
-next.onclick = () => {
-  if (index < pages.length - 1) index++;
-  render();
+prevBtn.onclick = () => {
+  if (index > 0) {
+    index--;
+    render();
+  }
 };
 
-prev.onclick = () => {
-  if (index > 0) index--;
-  render();
+nextBtn.onclick = () => {
+  if (index < pages.length - 1) {
+    index++;
+    render();
+  } else {
+    window.location.href = "index.html";
+  }
 };
 
 render();
