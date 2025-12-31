@@ -1,28 +1,26 @@
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
   margin: 0;
+  padding: 0;
   height: 100%;
-  font-family:
-    "LINE Seed Sans TH",
-    -apple-system,
-    system-ui,
-    sans-serif;
+  font-family: "Noto Sans Thai", -apple-system, system-ui, sans-serif;
   color: #fff;
   background: #000;
   overflow: hidden;
 }
 
-/* ===== Background (Liquid Glass iOS tone) ===== */
+/* ===== Background (iOS-like) ===== */
 .bg {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(900px at 15% 10%, #7b6cff 0%, transparent 60%),
-    radial-gradient(900px at 85% 35%, #c084fc 0%, transparent 65%),
-    linear-gradient(180deg, #0a0d18, #05060c);
+    radial-gradient(700px at 20% 15%, #7b6cff 0%, transparent 60%),
+    radial-gradient(600px at 80% 35%, #c77dff 0%, transparent 65%),
+    linear-gradient(180deg, #0b0f1a, #060712);
   z-index: -2;
 }
 
@@ -33,9 +31,9 @@ html, body {
   z-index: -1;
 }
 
-/* ===== Layout (iPhone-first only) ===== */
+/* ===== Layout (iPhone first) ===== */
 .stage {
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,53 +43,29 @@ html, body {
     env(safe-area-inset-bottom);
 }
 
-/* ===== Glass Card (Control Center style) ===== */
+/* ===== Glass Card (Control Center inspired – iOS safe) ===== */
 .card {
   width: 100%;
-  max-width: 360px; /* iPhone width */
-  padding: 34px 26px 26px;
-  border-radius: 32px;
+  max-width: 360px;
+  padding: 32px 24px 26px;
+  border-radius: 28px;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.35),
-      rgba(255,255,255,0.12)
-    );
+  background: rgba(255,255,255,0.18);
 
-  backdrop-filter: blur(80px) saturate(240%);
-  -webkit-backdrop-filter: blur(80px) saturate(240%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.55),
-    inset 0 18px 30px rgba(255,255,255,0.25),
-    0 50px 100px rgba(0,0,0,0.7);
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    0 30px 60px rgba(0,0,0,0.6);
 
-  position: relative;
-  overflow: hidden;
-
-  transition:
-    opacity 0.9s ease,
-    transform 0.9s ease,
-    filter 0.9s ease;
-}
-
-/* ===== Liquid noise (จำเป็นมากบน iOS) ===== */
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* ===== Content ===== */
 .content {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.9;
-  letter-spacing: 0.25px;
   text-align: center;
   white-space: pre-line;
 }
@@ -104,20 +78,24 @@ html, body {
   margin-top: 22px;
 }
 
-/* ===== Buttons (Liquid Glass) ===== */
+/* ===== Buttons ===== */
+button {
+  font-family: "Noto Sans Thai", -apple-system, system-ui, sans-serif;
+}
+
 .btn {
   padding: 10px 22px;
-  min-width: 120px;
+  min-width: 110px;
   border-radius: 999px;
   border: none;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .btn.primary {
@@ -126,7 +104,7 @@ html, body {
 }
 
 .btn.ghost {
-  background: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.25);
   color: #fff;
 }
 
@@ -134,15 +112,8 @@ html, body {
   transform: scale(0.96);
 }
 
-/* ===== Page transition ===== */
+/* ===== Fade ===== */
 .fade-out {
   opacity: 0;
-  transform: translateY(10px);
-  filter: blur(10px);
-}
-
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+  transform: translateY(8px);
 }
