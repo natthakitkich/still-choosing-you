@@ -15,13 +15,14 @@ html, body {
 .ios-bg {
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    #7c6cff 0%,
-    #8c6bff 35%,
-    #6f6bff 55%,
-    #2a2348 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      #7c6cff 0%,
+      #8c6bff 35%,
+      #6f6bff 55%,
+      #2a2348 100%
+    );
   z-index: -1;
 }
 
@@ -41,7 +42,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  padding:
+    env(safe-area-inset-top)
+    16px
+    env(safe-area-inset-bottom);
 }
 
 /* ===== Card ===== */
@@ -64,11 +68,8 @@ html, body {
     inset 0 0 0 1px rgba(255,255,255,.55),
     0 20px 60px rgba(0,0,0,.35);
 
-  transition: opacity .6s ease;
-}
-
-.card.hidden {
-  opacity: 0;
+  /* 🔽 ปรับตรงนี้: เฟดช้า นุ่ม ~2 วินาที */
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 /* ===== Text ===== */
@@ -109,4 +110,15 @@ html, body {
 .btn.ghost {
   background: rgba(255,255,255,.3);
   color: #fff;
+}
+
+/* ===== Fade ===== */
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
