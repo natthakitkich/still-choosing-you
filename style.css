@@ -7,63 +7,87 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Kodchasan', system-ui;
-  background: #000;
+  font-family: 'Anuphan', sans-serif;
+  background: #0b0f1a;
+  color: #ffffff;
+}
+
+#app {
+  position: relative;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-#bg {
-  position: fixed;
+/* Animated gradient background */
+#gradient-bg {
+  position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    #1b2240,
-    #2f466b,
-    #3a2f59,
-    #1b2240
-  );
-  background-size: 400% 400%;
-  animation: gradientMove 22s ease infinite;
+  background: radial-gradient(circle at 30% 30%, #2b3cff, #0b0f1a 60%);
+  animation: gradientMove 12s ease-in-out infinite alternate;
+  z-index: 0;
 }
 
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    background-position: 100% 100%;
+    filter: hue-rotate(25deg);
+  }
 }
 
-#stage {
+/* Card */
+.card {
   position: relative;
-  width: 100%;
+  z-index: 1;
   height: 100%;
-}
-
-.scene {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 48px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-
-  opacity: 0;
-  transform: scale(0.96);
-  filter: blur(14px);
-  transition: all 1.4s cubic-bezier(.22,.8,.25,1);
 }
 
-.scene.active {
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
-}
-
-p {
-  font-size: 18px;
+/* Text */
+#text {
+  font-size: 1.15rem;
   line-height: 1.9;
-  font-weight: 300;
-  color: rgba(255,255,255,0.92);
-  max-width: 720px;
+  max-width: 680px;
   white-space: pre-line;
+}
+
+/* Fade animation */
+.fade {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.fade.out {
+  opacity: 0;
+}
+
+/* Button */
+#nextBtn {
+  margin-top: 40px;
+  padding: 14px 36px;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  color: #0b0f1a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+#nextBtn:disabled {
+  opacity: 0.4;
+}
+
+#nextBtn:active {
+  transform: scale(0.97);
 }
