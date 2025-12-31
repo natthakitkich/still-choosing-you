@@ -5,23 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Still Choosing You</title>
 
-  <!-- Thai modern rounded font -->
   <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div id="app">
-    <div id="gradient-bg"></div>
+<div id="bg"></div>
 
-    <div class="card">
-      <div id="text" class="fade"></div>
+<div id="app">
 
-      <button id="nextBtn">ถัดไป</button>
+  <!-- COVER PAGE -->
+  <div id="cover" class="page active">
+    <div class="glass">
+      <h1>การ์ดใบนี้</h1>
+      <p>เขียนถึงคนคนเดียว</p>
+      <button id="startBtn">เปิดการ์ดปีใหม่</button>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- CONTENT PAGE -->
+  <div id="content" class="page">
+    <div class="glass content">
+      <div id="text"></div>
+
+      <div class="nav">
+        <button id="prevBtn">ย้อนกลับ</button>
+        <button id="nextBtn">ถัดไป</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
