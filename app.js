@@ -129,21 +129,13 @@ Still Choosing You…`,
 ];
 
 let index = 0;
-const card = document.getElementById("card");
-const content = document.getElementById("content");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
 
 function render() {
   content.textContent = pages[index];
 
-  if (index === 0) {
-    prev.style.display = "none";
-    next.textContent = "เปิดการ์ด";
-  } else {
-    prev.style.display = "inline-block";
-    next.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-  }
+  prev.style.display = index === 0 ? "none" : "inline-block";
+  next.textContent = index === 0 ? "เปิดการ์ด" :
+                     index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
 function transition(to) {
@@ -152,10 +144,19 @@ function transition(to) {
     index = to;
     render();
     card.classList.remove("fade-out");
-  }, 900);
+  }, 600);
 }
 
-prev.onclick = () => index > 0 && transition(index - 1);
-next.onclick = () => transition(index < pages.length - 1 ? index + 1 : 0);
+prev.onclick = () => {
+  if (index > 0) transition(index - 1);
+};
+
+next.onclick = () => {
+  if (index < pages.length - 1) {
+    transition(index + 1);
+  } else {
+    transition(0);
+  }
+};
 
 render();
