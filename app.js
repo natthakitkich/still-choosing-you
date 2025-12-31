@@ -1,15 +1,15 @@
-const cover = document.getElementById("cover");
-const reader = document.getElementById("reader");
-const startBtn = document.getElementById("startBtn");
-const textBox = document.getElementById("textContainer");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
+const landing = document.getElementById("landing");
+const letter = document.getElementById("letter");
+const textEl = document.getElementById("text");
+const openBtn = document.getElementById("openCard");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
 
-/* ✅ ข้อความครบ 100% */
+/* LETTER CONTENT – ครบ 100% */
 const pages = [
-`สวัสดีปีใหม่นะงับที่รัก
+`สวัสดีปีใหม่นะงับที่รัก`,
 
-ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
+`ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
 และเราอยากบอกเธอจากใจว่า
 คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ`,
 
@@ -117,45 +117,48 @@ Still choosing you…
 `เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
 ขอบคุณที่รักเรา
 ขอบคุณที่อยู่ข้างกัน
-และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
+และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
 
-สวัสดีปีใหม่นะงับ
+`สวัสดีปีใหม่นะงับ
 เรารักเธอนะ
 นักการทูตคนเก่งของผม`
 ];
 
 let index = 0;
 
-function renderText() {
-  textBox.className = "fade-out";
+/* Functions */
+function showPage() {
+  textEl.classList.remove("show");
   setTimeout(() => {
-    textBox.textContent = pages[index];
-    textBox.className = "fade-in";
-    prevBtn.disabled = index === 0;
-    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-  }, 420);
+    textEl.textContent = pages[index];
+    textEl.classList.add("show");
+  }, 200);
+
+  prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
+  nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
-startBtn.onclick = () => {
-  cover.classList.remove("active");
-  reader.classList.add("active");
+/* Events */
+openBtn.onclick = () => {
+  landing.classList.remove("active");
+  letter.classList.add("active");
   index = 0;
-  renderText();
+  showPage();
 };
 
 nextBtn.onclick = () => {
   if (index < pages.length - 1) {
     index++;
-    renderText();
+    showPage();
   } else {
-    reader.classList.remove("active");
-    cover.classList.add("active");
+    letter.classList.remove("active");
+    landing.classList.add("active");
   }
 };
 
 prevBtn.onclick = () => {
   if (index > 0) {
     index--;
-    renderText();
+    showPage();
   }
 };
