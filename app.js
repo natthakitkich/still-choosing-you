@@ -12,8 +12,9 @@ const pages = [
 
 `เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
 กลับมาดีขึ้นได้ขนาดนี้
-มันเหมือนหัวใจที่เคยพังทลายและสูญเสียตัวตน
-มันค่อย ๆ ฟื้นตัว
+มันเหมือนหัวใจที่เคยพังทลายและสูญเสียตัวตน`,
+
+`มันค่อย ๆ ฟื้นตัว
 และกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
 และรู้สึกว่ามันดีกับตัวเราและคนรอบข้าง`,
 
@@ -44,16 +45,18 @@ const pages = [
 
 `ตลอดเดือนตุลาคมที่เราได้อยู่กับเธอ
 ทั้งที่จาการ์ตาและบาหลี
-มันเป็นช่วงเวลาที่มีความหมายมากสำหรับเรา
-แม้เธอจะงานยุ่ง
+มันเป็นช่วงเวลาที่มีความหมายมากสำหรับเรา`,
+
+`แม้เธอจะงานยุ่ง
 แต่เธอก็ยังทำให้เรารู้สึกว่าถูกเลือก
 ถูกใส่ใจ
 และถูกรัก`,
 
 `เรามีความสุขมากจริง ๆ
 และเราภูมิใจในตัวเองมาก
-ที่เราทำตามสัญญานั้นได้
-ขอบคุณเธอที่เป็นแรงผลักดัน
+ที่เราทำตามสัญญานั้นได้`,
+
+`ขอบคุณเธอที่เป็นแรงผลักดัน
 เป็นกำลังใจ
 และเป็นเหตุผลที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้`,
 
@@ -69,8 +72,9 @@ const pages = [
 
 `เราอยากทิ้งทุกเรื่องที่หนักใจ
 ทุกความผิดพลาดไว้ในปีที่ผ่านมา
-แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่
-ด้วยหัวใจที่เรียนรู้
+แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่`,
+
+`ด้วยหัวใจที่เรียนรู้
 เติบโต
 และเข้าใจกันมากขึ้น`,
 
@@ -79,15 +83,17 @@ const pages = [
 
 `และการที่เรายังเลือกเธออยู่ตรงนี้
 ไม่ใช่เพราะมันง่าย
-ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
-แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
+ไม่ใช่เพราะเราอยากได้อะไรจากเธอ`,
+
+`แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
 เราเห็นภาพของชีวิตคู่ของเรา
 เห็นอนาคต
 ที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น`,
 
 `เหมือนเพลงที่เราเขียน
-Still choosing you…
-เรายังเลือกเธอ
+Still choosing you…`,
+
+`เรายังเลือกเธอ
 วันนี้
 พรุ่งนี้
 และในทุกวันที่เราจะเดินไปข้างหน้า
@@ -119,35 +125,33 @@ Still choosing you…
 let index = 0;
 let locked = false;
 
-const cover = document.getElementById('cover');
-const content = document.getElementById('content');
-const textEl = document.getElementById('text');
+const cover = document.getElementById("cover");
+const content = document.getElementById("content");
+const text = document.getElementById("text");
 
-const startBtn = document.getElementById('startBtn');
-const nextBtn = document.getElementById('nextBtn');
-const prevBtn = document.getElementById('prevBtn');
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
 startBtn.onclick = () => {
-  cover.classList.add('hidden');
-  content.classList.remove('hidden');
-  setTimeout(() => content.classList.add('active'), 50);
-  showPage(0);
+  cover.classList.remove("active");
+  content.classList.add("active");
+  index = 0;
+  render();
 };
 
-function showPage(i) {
+function render() {
   if (locked) return;
   locked = true;
 
-  textEl.style.opacity = 0;
+  text.style.opacity = 0;
 
   setTimeout(() => {
-    index = i;
-    textEl.textContent = pages[index];
-    textEl.style.opacity = 1;
+    text.textContent = pages[index];
+    text.style.opacity = 1;
 
-    prevBtn.disabled = index === 0;
-    nextBtn.textContent =
-      index === pages.length - 1 ? 'จบแล้ว' : 'ถัดไป';
+    prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
+    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 
     locked = false;
   }, 600);
@@ -155,20 +159,17 @@ function showPage(i) {
 
 nextBtn.onclick = () => {
   if (index < pages.length - 1) {
-    showPage(index + 1);
+    index++;
+    render();
   } else {
-    content.classList.remove('active');
-    setTimeout(() => {
-      content.classList.add('hidden');
-      cover.classList.remove('hidden');
-      cover.classList.add('active');
-      index = 0;
-    }, 800);
+    content.classList.remove("active");
+    cover.classList.add("active");
   }
 };
 
 prevBtn.onclick = () => {
   if (index > 0) {
-    showPage(index - 1);
+    index--;
+    render();
   }
 };
