@@ -1,7 +1,3 @@
-/* ===============================
-   ELEMENTS
-=============================== */
-const content = document.getElementById("content");
 const card = document.getElementById("card");
 
 const startNav = document.getElementById("startNav");
@@ -12,14 +8,18 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
-/* ===============================
-   STATE
-=============================== */
+const layerA = document.getElementById("contentA");
+const layerB = document.getElementById("contentB");
+
+let activeLayer = layerA;
+let inactiveLayer = layerB;
+
 let pageIndex = -1;
 let isAnimating = false;
 
 /* ===============================
-   TEXT (100% ORIGINAL – NO CUT)
+   ข้อความจดหมาย (ต้นฉบับผู้ใช้ 100%)
+   แยกหน้าตาม ENTER
 =============================== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
@@ -149,11 +149,11 @@ Still choosing you…
 const pages = rawText.trim().split(/\n\s*\n/);
 
 /* ===============================
-   START SCREEN
+   หน้าเปิดการ์ด
 =============================== */
 function showStart() {
   pageIndex = -1;
-  content.textContent =
+  activeLayer.textContent =
 `การ์ดใบนี้
 เขียนถึงคนคนเดียว
 
@@ -161,66 +161,56 @@ function showStart() {
 
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
+  nextBtn.textContent = "ถัดไป";
 }
 
 /* ===============================
-   RENDER WITH TRUE FADE (iOS SAFE)
+   Cinematic Crossfade (3s)
 =============================== */
-function renderPage() {
+function crossfadeTo(text) {
   if (isAnimating) return;
   isAnimating = true;
 
-  // reset classes
-  card.classList.remove("fade-in", "fade-out");
-  void card.offsetHeight;
+  inactiveLayer.textContent = text;
+  inactiveLayer.classList.add("active");
+  activeLayer.classList.remove("active");
 
-  // fade out
-  card.classList.add("fade-out");
+  [activeLayer, inactiveLayer] = [inactiveLayer, activeLayer];
 
   setTimeout(() => {
-    content.textContent = pages[pageIndex];
-
-    card.classList.remove("fade-out");
-    void card.offsetHeight;
-
-    card.classList.add("fade-in");
-
-    nextBtn.textContent =
-      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-
-    setTimeout(() => {
-      isAnimating = false;
-    }, 3000);
-
-  }, 100);
+    isAnimating = false;
+  }, 3000);
 }
 
 /* ===============================
-   EVENTS
+   Events
 =============================== */
 showStart();
 
 startBtn.onclick = () => {
-  // iOS Safari autoplay safe
+  // iOS Safari autoplay-safe
   bgm.volume = 0;
   bgm.play().catch(() => {});
+
   let v = 0;
-  const fadeIn = setInterval(() => {
+  const fade = setInterval(() => {
     v += 0.05;
     bgm.volume = Math.min(v, 1);
-    if (v >= 1) clearInterval(fadeIn);
+    if (v >= 1) clearInterval(fade);
   }, 100);
 
   pageIndex = 0;
   startNav.classList.add("hidden");
   pageNav.classList.remove("hidden");
-  renderPage();
+  crossfadeTo(pages[pageIndex]);
 };
 
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
-    renderPage();
+    crossfadeTo(pages[pageIndex]);
+    nextBtn.textContent =
+      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
   } else {
     showStart();
   }
@@ -229,6 +219,7 @@ nextBtn.onclick = () => {
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
-    renderPage();
+    crossfadeTo(pages[pageIndex]);
+    nextBtn.textContent = "ถัดไป";
   }
 };
