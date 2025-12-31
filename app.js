@@ -11,7 +11,9 @@ const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
 
-/* ===== ข้อความต้นฉบับ 100% (ไม่แตะ ไม่ตัด) ===== */
+/* ===============================
+   ข้อความต้นฉบับ 100%
+   =============================== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -72,7 +74,6 @@ const rawText = `
 
 และเราภูมิใจในตัวเองมาก ที่เราทำตามสัญญานั้นได้
 
-
 ขอบคุณเธอที่เป็นแรงผลักดัน เป็นกำลังใจ
 และเป็นเหตุผลที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้
 
@@ -118,7 +119,7 @@ Still choosing you…
 เราก็ยังเลือกเธอนะ
 
 สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่
-ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ
+ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ 
 
 และถ้าวันไหนต้องเจอเรื่องไม่ดี ก็ขอให้เรายังจับมือกันแน่น ๆ
 และก้าวข้ามมันไปด้วยกัน
@@ -138,6 +139,7 @@ Still choosing you…
 นักการทูตคนเก่งของชั้น
 `;
 
+/* แยกหน้า */
 const pages = rawText.trim().split(/\n\s*\n/);
 
 /* ===== หน้าแรก ===== */
@@ -151,45 +153,42 @@ function showStart() {
 
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
+
+  nextBtn.textContent = "ถัดไป";
 }
 
-/* ===== เฟดช้า นุ่ม ~2 วิ ===== */
+/* ===== Cross-fade render ===== */
 function renderPage() {
-  card.classList.remove("fade-in");
-  card.classList.add("fade-out");
+  card.classList.add("fade");
 
   requestAnimationFrame(() => {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       content.textContent = pages[pageIndex];
+      card.classList.remove("fade");
 
-      // ปรับข้อความปุ่ม
       if (pageIndex === pages.length - 1) {
         nextBtn.textContent = "จบแล้ว";
       } else {
         nextBtn.textContent = "ถัดไป";
       }
-
-      card.classList.remove("fade-out");
-      card.classList.add("fade-in");
-    }, 2000);
+    });
   });
 }
 
-/* ===== Start ===== */
+/* ===== Init ===== */
 showStart();
 
+/* ===== Start ===== */
 startBtn.onclick = () => {
-  if (bgm && bgm.paused) {
-    bgm.volume = 0;
-    bgm.play().then(() => {
-      let v = 0;
-      const fade = setInterval(() => {
-        v += 0.02;
-        bgm.volume = Math.min(v, 1);
-        if (v >= 1) clearInterval(fade);
-      }, 100);
-    }).catch(() => {});
-  }
+  bgm.volume = 0;
+  bgm.play().catch(() => {});
+
+  let v = 0;
+  const fadeIn = setInterval(() => {
+    v += 0.02;
+    bgm.volume = Math.min(v, 1);
+    if (v >= 1) clearInterval(fadeIn);
+  }, 100);
 
   pageIndex = 0;
   startNav.classList.add("hidden");
@@ -197,6 +196,7 @@ startBtn.onclick = () => {
   renderPage();
 };
 
+/* ===== Next ===== */
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
@@ -206,6 +206,7 @@ nextBtn.onclick = () => {
   }
 };
 
+/* ===== Prev ===== */
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
