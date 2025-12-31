@@ -13,27 +13,23 @@ html, body {
   overflow: hidden;
 }
 
-/* ===== Background (iOS-like) ===== */
-.bg {
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(700px at 20% 15%, #7b6cff 0%, transparent 60%),
-    radial-gradient(600px at 80% 35%, #c77dff 0%, transparent 65%),
-    linear-gradient(180deg, #0b0f1a, #060712);
-  z-index: -2;
-}
 
-/* ===== Particles ===== */
-#particles {
+/* ===== Liquid iOS26 Background ===== */
+.liquid-bg {
   position: fixed;
-  inset: 0;
+  inset: -20%;
+  background:
+    radial-gradient(700px at 20% 15%, #6a5cff 0%, transparent 55%),
+    radial-gradient(600px at 80% 35%, #b45cff 0%, transparent 60%),
+    radial-gradient(500px at 50% 80%, #ff4fd8 0%, transparent 65%),
+    linear-gradient(180deg, #0b0b18, #05050c);
+  filter: blur(40px) saturate(140%);
   z-index: -1;
 }
 
-/* ===== Layout (iPhone first) ===== */
+/* ===== iPhone-first Layout ===== */
 .stage {
-  height: 100svh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,26 +39,48 @@ html, body {
     env(safe-area-inset-bottom);
 }
 
-/* ===== Glass Card (Control Center inspired – iOS safe) ===== */
+/* ===== Glass Card (Control Center feel) ===== */
 .card {
   width: 100%;
-  max-width: 360px;
-  padding: 32px 24px 26px;
+  max-width: 340px;
+  padding: 32px 22px 24px;
   border-radius: 28px;
 
-  background: rgba(255,255,255,0.18);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.35),
+      rgba(255,255,255,0.12)
+    );
 
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(60px) saturate(180%);
+  -webkit-backdrop-filter: blur(60px) saturate(180%);
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.35),
-    0 30px 60px rgba(0,0,0,0.6);
+    inset 0 0 0 1px rgba(255,255,255,0.45),
+    inset 0 10px 24px rgba(255,255,255,0.18),
+    0 30px 80px rgba(0,0,0,0.7);
 
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity .9s ease, transform .9s ease, filter .9s ease;
 }
 
-/* ===== Content ===== */
+/* Glow edge */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.6)
+  );
+  opacity: .35;
+  pointer-events: none;
+}
+
+/* ===== Text ===== */
 .content {
   font-size: 16px;
   line-height: 1.9;
@@ -79,23 +97,19 @@ html, body {
 }
 
 /* ===== Buttons ===== */
-button {
-  font-family: "Noto Sans Thai", -apple-system, system-ui, sans-serif;
-}
-
 .btn {
-  padding: 10px 22px;
-  min-width: 110px;
+  min-width: 120px;
+  padding: 11px 18px;
   border-radius: 999px;
   border: none;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform .2s ease, opacity .2s ease;
 }
 
 .btn.primary {
@@ -109,11 +123,12 @@ button {
 }
 
 .btn:active {
-  transform: scale(0.96);
+  transform: scale(.96);
 }
 
-/* ===== Fade ===== */
+/* ===== Cinematic Transition ===== */
 .fade-out {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
+  filter: blur(10px);
 }
