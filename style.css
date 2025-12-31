@@ -9,85 +9,104 @@ html, body {
   height: 100%;
   font-family: 'Anuphan', sans-serif;
   background: #0b0f1a;
-  color: #ffffff;
+  color: #fff;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1200px at 20% 10%, rgba(120,140,255,0.25), transparent 60%),
+    radial-gradient(1000px at 80% 80%, rgba(255,120,200,0.18), transparent 60%),
+    linear-gradient(180deg, #0b0f1a, #05070d);
+  animation: floatBg 16s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes floatBg {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(20deg); }
 }
 
 #app {
-  position: relative;
   height: 100%;
-  width: 100%;
-  overflow: hidden;
 }
 
-/* Animated gradient background */
-#gradient-bg {
+.page {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, #2b3cff, #0b0f1a 60%);
-  animation: gradientMove 12s ease-in-out infinite alternate;
-  z-index: 0;
-}
-
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 0%;
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    background-position: 100% 100%;
-    filter: hue-rotate(25deg);
-  }
-}
-
-/* Card */
-.card {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  padding: 48px 28px;
-  display: flex;
-  flex-direction: column;
+  display: none;
   justify-content: center;
   align-items: center;
+  padding: 24px;
+}
+
+.page.active {
+  display: flex;
+}
+
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  padding: 36px 28px;
+  width: 100%;
+  max-width: 720px;
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
-/* Text */
-#text {
-  font-size: 1.15rem;
-  line-height: 1.9;
-  max-width: 680px;
+.glass h1 {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.glass p {
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#startBtn {
+  background: rgba(255,255,255,0.95);
+  color: #0b0f1a;
+}
+
+.content #text {
   white-space: pre-line;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin-bottom: 32px;
+  min-height: 40vh;
+  transition: opacity 0.6s ease;
 }
 
-/* Fade animation */
-.fade {
-  opacity: 1;
-  transition: opacity 0.8s ease;
-}
-
-.fade.out {
+.content #text.fade {
   opacity: 0;
 }
 
-/* Button */
-#nextBtn {
-  margin-top: 40px;
-  padding: 14px 36px;
-  font-size: 1rem;
-  border-radius: 999px;
-  border: none;
-  background: rgba(255,255,255,0.9);
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav button {
+  flex: 1;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.nav button.primary {
+  background: rgba(255,255,255,0.95);
   color: #0b0f1a;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
-#nextBtn:disabled {
-  opacity: 0.4;
-}
-
-#nextBtn:active {
-  transform: scale(0.97);
 }
