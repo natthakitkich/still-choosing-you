@@ -100,9 +100,8 @@ const pages = [
 
 Still Choosing You…`,
 
-`เรายังเลือกเธอ`,
-
-`วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
+`เรายังเลือกเธอ
+วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
 
 `หน้าเราก็ยังเลือกเธอนะ`,
 
@@ -137,8 +136,14 @@ const next = document.getElementById("next");
 
 function render() {
   content.textContent = pages[index];
-  prev.style.visibility = index === 0 ? "hidden" : "visible";
-  next.textContent = index === 0 ? "เปิดการ์ด" : (index === pages.length - 1 ? "จบแล้ว" : "ถัดไป");
+
+  if (index === 0) {
+    prev.style.display = "none";
+    next.textContent = "เปิดการ์ด";
+  } else {
+    prev.style.display = "inline-block";
+    next.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+  }
 }
 
 function transition(to) {
@@ -151,6 +156,6 @@ function transition(to) {
 }
 
 prev.onclick = () => index > 0 && transition(index - 1);
-next.onclick = () => index < pages.length - 1 ? transition(index + 1) : transition(0);
+next.onclick = () => transition(index < pages.length - 1 ? index + 1 : 0);
 
 render();
