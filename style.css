@@ -13,21 +13,28 @@ html, body {
   overflow: hidden;
 }
 
-
 /* ===== Liquid iOS26 Background ===== */
 .liquid-bg {
   position: fixed;
-  inset: -20%;
+  inset: -15%;
   background:
-    radial-gradient(700px at 20% 15%, #6a5cff 0%, transparent 55%),
-    radial-gradient(600px at 80% 35%, #b45cff 0%, transparent 60%),
-    radial-gradient(500px at 50% 80%, #ff4fd8 0%, transparent 65%),
-    linear-gradient(180deg, #0b0b18, #05050c);
-  filter: blur(40px) saturate(140%);
-  z-index: -1;
+    radial-gradient(700px at 20% 20%, #6f6bff 0%, transparent 60%),
+    radial-gradient(600px at 80% 35%, #c26bff 0%, transparent 65%),
+    radial-gradient(500px at 50% 80%, #ff5ccf 0%, transparent 70%),
+    linear-gradient(180deg, #0b0f24, #05060f);
+  filter: saturate(160%);
+  z-index: -2;
 }
 
-/* ===== iPhone-first Layout ===== */
+/* ===== Dust canvas ===== */
+#dust {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===== iPhone-first layout ===== */
 .stage {
   min-height: 100svh;
   display: flex;
@@ -39,7 +46,7 @@ html, body {
     env(safe-area-inset-bottom);
 }
 
-/* ===== Glass Card (Control Center feel) ===== */
+/* ===== Liquid Glass Card (Control Center feel) ===== */
 .card {
   width: 100%;
   max-width: 340px;
@@ -49,17 +56,20 @@ html, body {
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.35),
-      rgba(255,255,255,0.12)
+      rgba(160,140,255,0.45),
+      rgba(120,90,200,0.18)
     );
 
-  backdrop-filter: blur(60px) saturate(180%);
-  -webkit-backdrop-filter: blur(60px) saturate(180%);
+  backdrop-filter: blur(46px) saturate(200%);
+  -webkit-backdrop-filter: blur(46px) saturate(200%);
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.45),
-    inset 0 10px 24px rgba(255,255,255,0.18),
-    0 30px 80px rgba(0,0,0,0.7);
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    inset 0 8px 22px rgba(255,255,255,0.18),
+    0 30px 80px rgba(0,0,0,0.65);
+
+  position: relative;
+  overflow: hidden;
 
   transition: opacity .9s ease, transform .9s ease, filter .9s ease;
 }
@@ -68,15 +78,17 @@ html, body {
 .card::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: inherit;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0.6),
-    rgba(255,255,255,0.15),
-    rgba(255,255,255,0.6)
-  );
-  opacity: .35;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,0.55),
+      rgba(180,150,255,0.25),
+      rgba(255,255,255,0.55)
+    );
+  opacity: .4;
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
@@ -126,9 +138,15 @@ html, body {
   transform: scale(.96);
 }
 
-/* ===== Cinematic Transition ===== */
+/* ===== Page transition ===== */
 .fade-out {
   opacity: 0;
   transform: translateY(10px);
   filter: blur(10px);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
