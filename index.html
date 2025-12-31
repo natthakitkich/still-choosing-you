@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>New Year Card</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Year Card</title>
+
+  <!-- LINE Seed Sans TH -->
+  <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+Sans+TH:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="bg"></div>
+  <div class="background"></div>
 
-<div class="container">
-  <div class="glass card center">
-    <h1>การ์ดใบนี้</h1>
-    <p class="subtitle">เขียนถึงคนคนเดียว</p>
-    <a href="letter.html" class="btn primary">เปิดการ์ดปีใหม่</a>
-  </div>
-</div>
+  <main class="card glass">
+    <section id="content" class="page"></section>
 
+    <div class="controls">
+      <button id="prev" class="btn ghost">ย้อนกลับ</button>
+      <button id="next" class="btn primary">ถัดไป</button>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
