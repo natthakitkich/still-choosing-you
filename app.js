@@ -1,8 +1,4 @@
 const pages = [
-`การ์ดใบนี้
-เขียนถึงคนคนเดียว
-
-กดเพื่อเปิดการ์ดปีใหม่`,
 
 `สวัสดีปีใหม่นะงับที่รัก`,
 
@@ -101,9 +97,9 @@ const pages = [
 Still Choosing You…`,
 
 `เรายังเลือกเธอ
-วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้างหน้า`,
+วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
 
-`เราก็ยังเลือกเธอนะ`,
+`หน้าเราก็ยังเลือกเธอนะ`,
 
 `สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่`,
 
@@ -125,10 +121,12 @@ Still Choosing You…`,
 `สวัสดีปีใหม่นะงับ
 เรารักเธอนะ`,
 
-`นักการทูตคนเก่งของผม <3`
+`นักการทูตคนเก่งของเรา`
+
 ];
 
 let index = 0;
+
 const card = document.getElementById("card");
 const content = document.getElementById("content");
 const prev = document.getElementById("prev");
@@ -140,16 +138,63 @@ function render() {
   next.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
-function go(to) {
+function transition(to) {
   card.classList.add("fade-out");
   setTimeout(() => {
     index = to;
     render();
     card.classList.remove("fade-out");
-  }, 500);
+  }, 700);
 }
 
-prev.onclick = () => index > 0 && go(index - 1);
-next.onclick = () => index < pages.length - 1 ? go(index + 1) : go(0);
+prev.onclick = () => {
+  if (index > 0) transition(index - 1);
+};
+
+next.onclick = () => {
+  if (index < pages.length - 1) {
+    transition(index + 1);
+  } else {
+    transition(0);
+  }
+};
 
 render();
+
+/* ===== Dust / light particles (iPhone Safari safe) ===== */
+const canvas = document.getElementById("dust");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const particles = Array.from({ length: 28 }, () => ({
+  x: Math.random() * w,
+  y: Math.random() * h,
+  r: Math.random() * 1.2 + 0.4,
+  s: Math.random() * 0.25 + 0.05,
+  o: Math.random() * 0.25 + 0.05
+}));
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+  particles.forEach(p => {
+    p.y -= p.s;
+    if (p.y < -10) {
+      p.y = h + 10;
+      p.x = Math.random() * w;
+    }
+    ctx.fillStyle = `rgba(255,255,255,${p.o})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
