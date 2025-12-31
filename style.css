@@ -13,7 +13,7 @@ html, body {
   overflow: hidden;
 }
 
-/* ===== Liquid iOS-style Background ===== */
+/* ===== Background ===== */
 .liquid-bg {
   position: fixed;
   inset: -30%;
@@ -23,10 +23,18 @@ html, body {
     radial-gradient(600px at 50% 80%, #3dd6c6 0%, transparent 65%),
     linear-gradient(180deg, #0b1020, #05060f);
   filter: blur(60px) saturate(160%);
-  z-index: -2;
+  z-index: -3;
 }
 
-/* ===== Stage (iPhone-first) ===== */
+/* ===== Dust layer ===== */
+#dust {
+  position: fixed;
+  inset: 0;
+  z-index: -1;              /* 🔴 จุดสำคัญ */
+  pointer-events: none;
+}
+
+/* ===== Stage ===== */
 .stage {
   min-height: 100svh;
   display: flex;
@@ -36,9 +44,11 @@ html, body {
     env(safe-area-inset-top)
     16px
     env(safe-area-inset-bottom);
+  position: relative;
+  z-index: 1;
 }
 
-/* ===== Glass Card ===== */
+/* ===== Card ===== */
 .card {
   width: 100%;
   max-width: 360px;
@@ -61,6 +71,7 @@ html, body {
     0 40px 90px rgba(0,0,0,0.7);
 
   position: relative;
+  z-index: 2;               /* 🔴 สำคัญมาก */
   overflow: hidden;
 
   transition: opacity .9s ease, transform .9s ease, filter .9s ease;
@@ -82,29 +93,12 @@ html, body {
   pointer-events: none;
 }
 
-/* Subtle noise (iOS Safari friendly) */
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.015),
-      rgba(255,255,255,0.015) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  pointer-events: none;
-}
-
 /* ===== Text ===== */
 .content {
   font-size: 16.5px;
   line-height: 1.9;
   text-align: center;
   white-space: pre-line;
-  letter-spacing: .2px;
 }
 
 /* ===== Nav ===== */
@@ -127,8 +121,6 @@ html, body {
 
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-
-  transition: transform .2s ease, opacity .2s ease;
 }
 
 .btn.primary {
@@ -141,11 +133,6 @@ html, body {
   color: #fff;
 }
 
-.btn:active {
-  transform: scale(.96);
-}
-
-/* ===== Page Transition ===== */
 .fade-out {
   opacity: 0;
   transform: translateY(10px);
