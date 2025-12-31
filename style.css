@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -8,51 +7,50 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: 'Anuphan', sans-serif;
-  color: #ffffff;
-  overflow: hidden;
+  background: #0b1020;
+  color: #fff;
 }
 
-/* Background */
 .bg {
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    #0b1020,
-    #141a33,
-    #0e162a
-  );
+  background: linear-gradient(120deg, #0b1020, #151b36, #0e162a);
   background-size: 300% 300%;
-  animation: gradientMove 20s ease infinite;
+  animation: bgMove 20s ease infinite;
   z-index: -2;
 }
 
-@keyframes gradientMove {
+@keyframes bgMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Particles (very subtle) */
 .particles {
   position: fixed;
   inset: 0;
   background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.4;
   z-index: -1;
 }
 
-/* App */
 #app {
   height: 100%;
-  display: flex;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
-/* Glass Card */
+.screen.active {
+  display: flex;
+}
+
 .card {
   width: 100%;
   max-width: 420px;
@@ -62,62 +60,41 @@ html, body {
   backdrop-filter: blur(18px);
   box-shadow: 0 30px 60px rgba(0,0,0,0.35);
   text-align: center;
-
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  animation: fadeIn 1.2s ease;
 }
 
-.card.active {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.card.hidden {
-  display: none;
-}
-
-/* Typography */
 h1 {
-  font-size: 28px;
   font-weight: 500;
   margin-bottom: 8px;
 }
 
 p {
-  font-size: 16px;
   font-weight: 300;
   opacity: 0.85;
-  margin-bottom: 28px;
 }
 
 #text {
+  white-space: pre-line;
   font-size: 18px;
   line-height: 1.9;
-  white-space: pre-line;
-  min-height: 280px;
-  transition: opacity 1.2s ease;
+  min-height: 260px;
 }
 
-/* Buttons */
 button {
-  font-family: inherit;
-  border: none;
-  border-radius: 999px;
+  margin-top: 20px;
   padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
   font-size: 16px;
-  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
-  background: rgba(255,255,255,0.9);
-  color: #111;
 }
 
-button:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-/* Navigation */
 .nav {
   display: flex;
   justify-content: space-between;
