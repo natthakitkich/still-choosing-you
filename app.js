@@ -1,7 +1,4 @@
-const content = document.getElementById("content");
-const card = document.getElementById("card");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
+
 
 /* ===== Pages ===== */
 const pages = [
