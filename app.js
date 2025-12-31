@@ -10,9 +10,8 @@ const nextBtn = document.getElementById("next");
 const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
-let isTransitioning = false;
 
-/* ===== ข้อความจดหมาย (ครบ 100%) ===== */
+/* ===== ข้อความต้นฉบับ 100% (ไม่แตะ ไม่ตัด) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -73,8 +72,68 @@ const rawText = `
 
 และเราภูมิใจในตัวเองมาก ที่เราทำตามสัญญานั้นได้
 
+
+ขอบคุณเธอที่เป็นแรงผลักดัน เป็นกำลังใจ
+และเป็นเหตุผลที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้
+
+แต่แน่นอนว่าปีนี้ไม่ได้มีแค่ช่วงเวลาที่ราบรื่นทั้งหมด
+
+คนเรามีวันที่พลาด วันที่อ่อนแอกันได้
+
+แต่สิ่งนึงที่เราอยากบอกเธอให้ชัดที่สุดคือ
+
+แม้จะมีวันที่ยากสำหรับเรา 
+
+แต่เราก็ยังเลือกเธอนะ
+
+และเราก็ผ่านมาได้ด้วยกันแล้ว
+
+เราอยากทิ้งทุกเรื่องที่หนักใจ ทุกความผิดพลาดไว้ในปีที่ผ่านมา 
+
+แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่ 
+
+ด้วยหัวใจที่เรียนรู้ 
+
+เติบโต และเข้าใจกันมากขึ้น
+
 เรารักเธอมาก
 รักเธอที่สุด
+
+และการที่เรายังเลือกเธออยู่ตรงนี้
+ไม่ใช่เพราะมันง่าย ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
+
+แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
+เราเห็นภาพของชีวิตคู่ของเรา
+
+เห็นอนาคตที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น
+
+เหมือนเพลงที่เราเขียน
+
+Still choosing you…
+
+เรายังเลือกเธอ
+
+วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้างหน้า
+
+เราก็ยังเลือกเธอนะ
+
+สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่
+ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ
+
+และถ้าวันไหนต้องเจอเรื่องไม่ดี ก็ขอให้เรายังจับมือกันแน่น ๆ
+และก้าวข้ามมันไปด้วยกัน
+เหมือนที่เราเคยพูด เคยตั้งใจ และเคยสัญญากันไว้
+
+เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
+
+ขอบคุณที่รักเรา
+
+ขอบคุณที่อยู่ข้างกัน
+
+และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
+
+สวัสดีปีใหม่นะงับ
+เรารักเธอนะ 
 
 นักการทูตคนเก่งของชั้น
 `;
@@ -84,56 +143,64 @@ const pages = rawText.trim().split(/\n\s*\n/);
 /* ===== หน้าแรก ===== */
 function showStart() {
   pageIndex = -1;
-  content.textContent = `การ์ดใบนี้
+  content.textContent =
+`การ์ดใบนี้
 เขียนถึงคนคนเดียว
 
 กดเพื่อเปิดอ่านการ์ด`;
+
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
-  nextBtn.textContent = "ถัดไป";
 }
 
-/* ===== เปลี่ยนหน้า (เฟดแบบเดิม + เว้น 3 วิ) ===== */
-function changePage(text) {
-  if (isTransitioning) return;
-  isTransitioning = true;
+/* ===== เฟดช้า นุ่ม ~2 วิ ===== */
+function renderPage() {
+  card.classList.remove("fade-in");
+  card.classList.add("fade-out");
 
-  card.classList.add("hidden");
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      content.textContent = pages[pageIndex];
 
-  setTimeout(() => {
-    content.textContent = text;
-    card.classList.remove("hidden");
-    isTransitioning = false;
-  }, 3000);
+      // ปรับข้อความปุ่ม
+      if (pageIndex === pages.length - 1) {
+        nextBtn.textContent = "จบแล้ว";
+      } else {
+        nextBtn.textContent = "ถัดไป";
+      }
+
+      card.classList.remove("fade-out");
+      card.classList.add("fade-in");
+    }, 2000);
+  });
 }
 
-/* ===== Init ===== */
+/* ===== Start ===== */
 showStart();
 
-/* ===== Events ===== */
 startBtn.onclick = () => {
-  bgm.volume = 0;
-  bgm.play().catch(() => {});
-  let v = 0;
-  const fadeAudio = setInterval(() => {
-    v += 0.05;
-    bgm.volume = Math.min(v, 1);
-    if (v >= 1) clearInterval(fadeAudio);
-  }, 100);
+  if (bgm && bgm.paused) {
+    bgm.volume = 0;
+    bgm.play().then(() => {
+      let v = 0;
+      const fade = setInterval(() => {
+        v += 0.02;
+        bgm.volume = Math.min(v, 1);
+        if (v >= 1) clearInterval(fade);
+      }, 100);
+    }).catch(() => {});
+  }
 
   pageIndex = 0;
   startNav.classList.add("hidden");
   pageNav.classList.remove("hidden");
-  changePage(pages[pageIndex]);
+  renderPage();
 };
 
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
-    changePage(pages[pageIndex]);
-    if (pageIndex === pages.length - 1) {
-      nextBtn.textContent = "จบแล้ว";
-    }
+    renderPage();
   } else {
     showStart();
   }
@@ -142,7 +209,6 @@ nextBtn.onclick = () => {
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
-    nextBtn.textContent = "ถัดไป";
-    changePage(pages[pageIndex]);
+    renderPage();
   }
 };
