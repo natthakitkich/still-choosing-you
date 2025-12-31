@@ -2,13 +2,13 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Still choosing you</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -23,19 +23,19 @@
     <button id="startBtn">เปิดการ์ดปีใหม่</button>
   </section>
 
-  <!-- Audio -->
-  <audio id="bgMusic" loop>
+  <!-- Audio (iOS safe) -->
+  <audio id="bgMusic" preload="auto" playsinline>
     <source src="music/still-choosing-you.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Content -->
+  <!-- Pages -->
   <main id="content" class="hidden">
 
-    <section class="scene reveal">
+    <section class="page">
       <p>สวัสดีปีใหม่นะงับที่รัก</p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
         ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ<br>
         และเราอยากบอกเธอจากใจว่า<br>
@@ -43,55 +43,51 @@
       </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
         ถ้ามองย้อนกลับไปเธอคือคนแรก<br>
         และเป็นคนเดียวที่ทำให้เรากลับมามีพลังใจ<br>
         มีรอยยิ้ม<br>
-        และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนึ้
+        และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนี้
       </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
-        เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้<br>
-        กลับมาดีขึ้นได้ขนาดนี้
+        เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
       </p>
       <p>
-        มันเหมือนหัวใจที่เคยพังทขาย<br>
-        และสูญเสียตัวตตน<br>
-        มันค่อย ๆ ฟื้นตัว<br>
-        และกลับมาเป็นเราในเวอร์ชั่นที่เราภูมิใจ
+        มันเหมือนหัวใจที่เคยพังทลาย<br>
+        และสูญเสียตัวตน<br>
+        ค่อย ๆ ฟื้นตัว
       </p>
       <p>
-        และรู้สึกว่ามันดีกับตัวเรา<br>
-        และคนรอบข้าง
+        และกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
       </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
         ซึ่งทั้งหมดนี้<br>
-        เราพูดได้เต็มปากว่ามันเกิดขึ้นเพราะมีเธออยู่ตรงนี้…<br>
-        ข้าง ๆ เรา
+        เราพูดได้เต็มปากว่ามันเกิดขึ้น<br>
+        เพราะมีเธออยู่ตรงนี้
       </p>
       <p>
-        ไม่ว่าที่ผ่านมาเราจะทำตัวแย่แค่ไหน<br>
-        แต่เธอก็ยังไม่ปล่อยมือเรา
+        ข้าง ๆ เรา
       </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
         ปีนี้เราเดินมาด้วยกันหลายช่วงเวลามาก
       </p>
       <p>
-        เดือนมีนาคมมัรยังชัดอยู่ในความทรงจำของเรา<br>
-        วันที่เธอบินมาหาเราตามสัญญาที่เคยให้กันไว้
+        เดือนมีนาคมยังชัดอยู่ในความทรงจำของเรา<br>
+        วันที่เธอบินมาหาเราตามสัญญา
       </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
         วันเกิดปีนี้ของเราทั้งคู่<br>
         เป็นวันที่เรามีความสุขมากจริง ๆ
@@ -101,177 +97,33 @@
         ได้หัวเราะ<br>
         ได้อยู่ด้วยกันแบบไม่ต้องรีบ
       </p>
-      <p>
-        มันเป็นความสุขที่เรียบง่าย<br>
-        แต่เต็มไปด้วยความสุข
-      </p>
-      <p>
-        และมันทำให้เรารู้ว่า<br>
-        ความรักของเรามันมีตัวตนจริง ๆ
-      </p>
     </section>
 
-    <section class="scene reveal">
+    <section class="page">
       <p>
-        หลังจากนั้นเราก็ตั้งใจทำตามสัญญาของเราเหมือนกัน<br>
+        หลังจากนั้นเราก็ตั้งใจทำตามสัญญาของเรา
+      </p>
+      <p>
         ด้วยการบินไปหาเธอที่อินโดฯ
       </p>
       <p>
-        มันเป็นการเดินทางไกลที่สุดในชีวิตเรา<br>
-        และก็เป็นการเดินทางที่มีความสุขที่สุดเหมือนกัน
+        มันเป็นการเดินทางไกลที่สุด<br>
+        และมีความสุขที่สุดในชีวิตเรา
       </p>
     </section>
 
-    <section class="scene reveal">
-      <p>
-        ตลอดเดือนตุลาคม<br>
-        ที่เราได้อยู่กับเธอทั้งที่จาการ์ตาและบาหลี
-      </p>
-      <p>
-        มันเป็นช่วงเวลาที่มีความหมายมากสำหรับเรา
-      </p>
-      <p>
-        แม้เธอจะงานยุ่ง<br>
-        แต่เธอก็ยังทำให้เรารู้สึกว่าถูกเลือก<br>
-        ถูกใส่ใจ<br>
-        และถูกรัก
-      </p>
-      <p>
-        เรามีความสุขมากจริง ๆ
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        และเราภูมิใจในตัวเองมาก<br>
-        ที่เราทำตามสัญญานั้นได้
-      </p>
-      <p>
-        ขอบคุณเธอที่เป็นแรงผลักดัน<br>
-        เป็นกำลังใจ<br>
-        และเป็นเหตุผล<br>
-        ที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        แต่แน่นอนว่าปีนี้<br>
-        ไม่ได้มีแค่ช่วงเวลาที่ราบรื่นทั้งหมด
-      </p>
-      <p>
-        คนเรามีวันที่พลาด<br>
-        วันที่อ่อนแอกันได้
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        แต่สิ่งนึงที่เราอยากบอกเธอให้ชัดที่สุดคือ
-      </p>
-      <p>
-        แม้จะมีวันที่ยากสำหรับเรา<br>
-        แต่เราก็ยังเลือกเธอนะ
-      </p>
-      <p>
-        และเราก็ผ่านมาได้ด้วยกันแล้ว
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        เราอยากทิ้งทุกเรื่องที่หนักใจ<br>
-        ทุกความผิดพลาดไว้ในปีที่ผ่านมา
-      </p>
-      <p>
-        แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่<br>
-        ด้วยหัวใจที่เรียนรู้<br>
-        เติบโต<br>
-        และเข้าใจกันมากขึ้น
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        เรารักเธอมาก<br>
-        รักเธอที่สุด
-      </p>
-      <p>
-        และการที่เรายังเลือกเธออยู่ตรงนี้<br>
-        ไม่ใช่เพราะมันง่าย<br>
-        ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        แต่เพราะเราเห็นเป้าหมายของชีวิตเรา<br>
-        เราเห็นภาพของชีวิตคู่ของเรา
-      </p>
-      <p>
-        เห็นอนาคต<br>
-        ที่มีคำว่า “เรา”<br>
-        ทั้งคู่อยู่ในนั้น
-      </p>
-    </section>
-
-    <section class="scene reveal emphasis">
-      <p>
-        เหมือนเพลงที่เราเขียน
-      </p>
-      <p>
-        Still choosing you…
-      </p>
+    <section class="page emphasis">
+      <p>Still choosing you…</p>
       <p>
         เรายังเลือกเธอ<br>
         วันนี้<br>
         พรุ่งนี้<br>
-        และในทุกวันที่เราจะเดินไปข้างหน้า<br>
-        เราก็ยังเลือกเธอนะ
+        และทุกวันที่เราจะเดินไปข้างหน้า
       </p>
     </section>
 
-    <section class="scene reveal">
-      <p>
-        สุดท้ายขอให้ปีใหม่นี้<br>
-        เป็นปีที่ดีสำหรับเราทั้งคู่
-      </p>
-      <p>
-        ขอให้เราทั้งคู่มีสติ<br>
-        มีความเข้มแข็ง<br>
-        และเจอแต่สิ่งดี ๆ
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        และถ้าวันไหนต้องเจอเรื่องไม่ดี<br>
-        ก็ขอให้เรายังจับมือกันแน่น ๆ
-      </p>
-      <p>
-        และก้าวข้ามมันไปด้วยกัน<br>
-        เหมือนที่เราเคยพูด<br>
-        เคยตั้งใจ<br>
-        และเคยสัญญากันไว้
-      </p>
-    </section>
-
-    <section class="scene reveal">
-      <p>
-        เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา<br>
-        ขอบคุณที่รักเรา<br>
-        ขอบคุณที่อยู่ข้างกัน
-      </p>
-      <p>
-        และขอบคุณ<br>
-        ที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
-      </p>
-    </section>
-
-    <section class="scene reveal ending">
-      <p>
-        สวัสดีปีใหม่นะงับ
-      </p>
+    <section class="page ending">
+      <p>สวัสดีปีใหม่นะงับ</p>
       <p>
         เรารักเธอนะ<br>
         นักการทูตคนเก่งของผม
