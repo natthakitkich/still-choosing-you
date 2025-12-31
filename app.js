@@ -1,7 +1,15 @@
-const pages = [
-`สวัสดีปีใหม่นะงับที่รัก`,
+const cover = document.getElementById("cover");
+const reader = document.getElementById("reader");
+const startBtn = document.getElementById("startBtn");
+const textBox = document.getElementById("textContainer");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
-`ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
+/* ✅ ข้อความครบ 100% */
+const pages = [
+`สวัสดีปีใหม่นะงับที่รัก
+
+ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
 และเราอยากบอกเธอจากใจว่า
 คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ`,
 
@@ -12,9 +20,8 @@ const pages = [
 
 `เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
 กลับมาดีขึ้นได้ขนาดนี้
-มันเหมือนหัวใจที่เคยพังทลายและสูญเสียตัวตน`,
-
-`มันค่อย ๆ ฟื้นตัว
+มันเหมือนหัวใจที่เคยพังทลายและสูญเสียตัวตน
+มันค่อย ๆ ฟื้นตัว
 และกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
 และรู้สึกว่ามันดีกับตัวเราและคนรอบข้าง`,
 
@@ -45,18 +52,16 @@ const pages = [
 
 `ตลอดเดือนตุลาคมที่เราได้อยู่กับเธอ
 ทั้งที่จาการ์ตาและบาหลี
-มันเป็นช่วงเวลาที่มีความหมายมากสำหรับเรา`,
-
-`แม้เธอจะงานยุ่ง
+มันเป็นช่วงเวลาที่มีความหมายมากสำหรับเรา
+แม้เธอจะงานยุ่ง
 แต่เธอก็ยังทำให้เรารู้สึกว่าถูกเลือก
 ถูกใส่ใจ
 และถูกรัก`,
 
 `เรามีความสุขมากจริง ๆ
 และเราภูมิใจในตัวเองมาก
-ที่เราทำตามสัญญานั้นได้`,
-
-`ขอบคุณเธอที่เป็นแรงผลักดัน
+ที่เราทำตามสัญญานั้นได้
+ขอบคุณเธอที่เป็นแรงผลักดัน
 เป็นกำลังใจ
 และเป็นเหตุผลที่ทำให้เรากล้าก้าวไปไกลขนาดนั้นได้`,
 
@@ -72,9 +77,8 @@ const pages = [
 
 `เราอยากทิ้งทุกเรื่องที่หนักใจ
 ทุกความผิดพลาดไว้ในปีที่ผ่านมา
-แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่`,
-
-`ด้วยหัวใจที่เรียนรู้
+แล้วจับมือกันก้าวไปข้างหน้าในปีใหม่
+ด้วยหัวใจที่เรียนรู้
 เติบโต
 และเข้าใจกันมากขึ้น`,
 
@@ -83,17 +87,15 @@ const pages = [
 
 `และการที่เรายังเลือกเธออยู่ตรงนี้
 ไม่ใช่เพราะมันง่าย
-ไม่ใช่เพราะเราอยากได้อะไรจากเธอ`,
-
-`แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
+ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
+แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
 เราเห็นภาพของชีวิตคู่ของเรา
 เห็นอนาคต
 ที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น`,
 
 `เหมือนเพลงที่เราเขียน
-Still choosing you…`,
-
-`เรายังเลือกเธอ
+Still choosing you…
+เรายังเลือกเธอ
 วันนี้
 พรุ่งนี้
 และในทุกวันที่เราจะเดินไปข้างหน้า
@@ -115,54 +117,38 @@ Still choosing you…`,
 `เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
 ขอบคุณที่รักเรา
 ขอบคุณที่อยู่ข้างกัน
-และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
+และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
 
-`สวัสดีปีใหม่นะงับ
+สวัสดีปีใหม่นะงับ
 เรารักเธอนะ
 นักการทูตคนเก่งของผม`
 ];
 
 let index = 0;
-let locked = false;
 
-const cover = document.getElementById("cover");
-const content = document.getElementById("content");
-const text = document.getElementById("text");
-
-const startBtn = document.getElementById("startBtn");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
+function renderText() {
+  textBox.className = "fade-out";
+  setTimeout(() => {
+    textBox.textContent = pages[index];
+    textBox.className = "fade-in";
+    prevBtn.disabled = index === 0;
+    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+  }, 420);
+}
 
 startBtn.onclick = () => {
   cover.classList.remove("active");
-  content.classList.add("active");
+  reader.classList.add("active");
   index = 0;
-  render();
+  renderText();
 };
-
-function render() {
-  if (locked) return;
-  locked = true;
-
-  text.style.opacity = 0;
-
-  setTimeout(() => {
-    text.textContent = pages[index];
-    text.style.opacity = 1;
-
-    prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
-    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-
-    locked = false;
-  }, 600);
-}
 
 nextBtn.onclick = () => {
   if (index < pages.length - 1) {
     index++;
-    render();
+    renderText();
   } else {
-    content.classList.remove("active");
+    reader.classList.remove("active");
     cover.classList.add("active");
   }
 };
@@ -170,6 +156,6 @@ nextBtn.onclick = () => {
 prevBtn.onclick = () => {
   if (index > 0) {
     index--;
-    render();
+    renderText();
   }
 };
