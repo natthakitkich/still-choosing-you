@@ -160,22 +160,34 @@ function showStart() {
 }
 
 /* ===== Render page (fade 3 วินาที) ===== */
+
 function renderPage() {
-  card.classList.remove("fade-in");
+  // 1. ล้างสถานะเดิมทั้งหมด (กัน Safari ค้าง state)
+  card.classList.remove("fade-in", "fade-out");
+
+  // 2. บังคับ reflow ให้ Safari paint จริง
+  void card.offsetHeight;
+
+  // 3. เริ่ม fade-out
   card.classList.add("fade-out");
 
-  // บังคับให้ Safari รับรู้ transition
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      content.textContent = pages[pageIndex];
+  // 4. รอให้ Safari register fade-out
+  setTimeout(() => {
+    // เปลี่ยนข้อความหลังเริ่ม fade-out แล้ว
+    content.textContent = pages[pageIndex];
 
-      card.classList.remove("fade-out");
-      card.classList.add("fade-in");
+    // 5. reset อีกครั้งก่อน fade-in
+    card.classList.remove("fade-out");
+    void card.offsetHeight;
 
-      nextBtn.textContent =
-        pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-    }, 50);
-  });
+    // 6. fade-in
+    card.classList.add("fade-in");
+
+    // 7. เปลี่ยนข้อความปุ่มหน้าสุดท้าย
+    nextBtn.textContent =
+      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+
+  }, 100); // delay สั้น ๆ แต่จำเป็นมากสำหรับ iOS Safari
 }
 
 /* ===== Init ===== */
