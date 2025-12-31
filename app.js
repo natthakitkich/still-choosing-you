@@ -50,60 +50,69 @@ const pages = [
 และทุกวันที่จะเดินไปข้างหน้า`,
 `เราก็ยังเลือกเธอนะ`,
 `สวัสดีปีใหม่นะงับ
-นักการทูตคนเก่งของเรา`
+นักการทูตคนเก่งของชั้น`
 ];
 
 let index = 0;
-
-const card = document.getElementById("card");
 const content = document.getElementById("content");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
+const card = document.getElementById("card");
 
 function render() {
   content.textContent = pages[index];
-  prev.style.display = index === 0 ? "none" : "inline-block";
-  next.textContent = index === 0 ? "เปิดการ์ด" : "ถัดไป";
 }
-
-function go(to) {
-  card.classList.add("fade-out");
-  setTimeout(() => {
-    index = to;
-    render();
-    card.classList.remove("fade-out");
-  }, 500);
-}
-
-prev.onclick = () => index > 0 && go(index - 1);
-next.onclick = () => index < pages.length - 1 && go(index + 1);
-
 render();
 
-/* ===== Dust (iOS safe) ===== */
-const canvas = document.getElementById("dust");
+document.getElementById("next").onclick = () => {
+  if (index < pages.length - 1) {
+    card.classList.add("fade-out");
+    setTimeout(() => {
+      index++;
+      render();
+      card.classList.remove("fade-out");
+      card.classList.add("fade-in");
+    }, 300);
+  }
+};
+
+document.getElementById("prev").onclick = () => {
+  if (index > 0) {
+    card.classList.add("fade-out");
+    setTimeout(() => {
+      index--;
+      render();
+      card.classList.remove("fade-out");
+      card.classList.add("fade-in");
+    }, 300);
+  }
+};
+
+/* ===== Dust particles (เบา + iOS-safe) ===== */
+const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
+let w, h, dots = [];
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
 }
-resize();
 window.addEventListener("resize", resize);
+resize();
 
-const dots = Array.from({ length: 40 }, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  r: Math.random() * 1.2 + 0.4,
-  s: Math.random() * 0.25 + 0.05
-}));
+for (let i = 0; i < 50; i++) {
+  dots.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.2 + 0.4,
+    v: Math.random() * 0.3 + 0.1
+  });
+}
 
 function animate() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
   dots.forEach(d => {
-    d.y -= d.s;
-    if (d.y < -10) d.y = canvas.height + 10;
-    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    d.y -= d.v;
+    if (d.y < 0) d.y = h;
     ctx.beginPath();
     ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
     ctx.fill();
