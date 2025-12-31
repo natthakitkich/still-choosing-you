@@ -1,30 +1,26 @@
-const screens = document.querySelectorAll('.screen');
-const startBtn = document.getElementById('startBtn');
-const bgm = document.getElementById('bgm');
+const pages = document.querySelectorAll(".page");
+const nextBtn = document.getElementById("nextBtn");
+const startBtn = document.getElementById("startBtn");
+const bgm = document.getElementById("bgm");
 
 let index = 0;
-let started = false;
 
-function show(i) {
-  screens.forEach(s => s.classList.remove('active'));
-  screens[i].classList.add('active');
+/* ===== iOS AUDIO FIX (100%) ===== */
+startBtn.addEventListener("touchstart", () => {
+  bgm.currentTime = 0;
+  bgm.muted = false;
+  bgm.play();
+  goNext();
+}, { once: true });
+
+function goNext() {
+  pages[index].classList.remove("active");
+  index++;
+  if (index < pages.length) {
+    pages[index].classList.add("active");
+  } else {
+    nextBtn.style.display = "none";
+  }
 }
 
-startBtn.addEventListener('click', () => {
-  if (started) return;
-  started = true;
-
-  bgm.volume = 0.8;
-  bgm.play().catch(()=>{});
-
-  index = 1;
-  show(index);
-});
-
-document.body.addEventListener('click', () => {
-  if (!started) return;
-  if (index >= screens.length - 1) return;
-
-  index++;
-  show(index);
-});
+nextBtn.addEventListener("touchstart", goNext);
