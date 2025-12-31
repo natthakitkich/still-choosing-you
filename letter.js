@@ -1,17 +1,13 @@
-const intro = document.getElementById("intro");
-const letter = document.getElementById("letter");
-const textEl = document.getElementById("text");
+const text = document.getElementById("text");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
-const startBtn = document.getElementById("startBtn");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-
-let index = 0;
+let i = 0;
 
 const pages = [
-`สวัสดีปีใหม่นะงับที่รัก`,
+`สวัสดีปีใหม่นะงับที่รัก
 
-`ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
+ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
 และเราอยากบอกเธอจากใจว่า
 คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ`,
 
@@ -40,9 +36,9 @@ const pages = [
 เป็นวันที่เรามีความสุขมากจริง ๆ
 เราได้ใช้เวลา
 ได้หัวเราะ
-ได้อยู่ด้วยกันแบบไม่ต้องรีบ`,
+ได้อยู่ด้วยกันแบบไม่ต้องรีบ
 
-`มันเป็นความสุขที่เรียบง่าย
+มันเป็นความสุขที่เรียบง่าย
 แต่เต็มไปด้วยความสุข
 และมันทำให้เรารู้ว่า
 ความรักของเรามันมีตัวตนจริง ๆ`,
@@ -70,9 +66,9 @@ const pages = [
 `แต่แน่นอนว่าปีนี้
 ไม่ได้มีแค่ช่วงเวลาที่ราบรื่นทั้งหมด
 คนเรามีวันที่พลาด
-วันที่อ่อนแอกันได้`,
+วันที่อ่อนแอกันได้
 
-`แต่สิ่งหนึ่งที่เราอยากบอกเธอให้ชัดที่สุดคือ
+แต่สิ่งหนึ่งที่เราอยากบอกเธอให้ชัดที่สุดคือ
 แม้จะมีวันที่ยากสำหรับเรา
 แต่เราก็ยังเลือกเธอนะ
 และเราก็ผ่านมาได้ด้วยกันแล้ว`,
@@ -85,9 +81,9 @@ const pages = [
 และเข้าใจกันมากขึ้น`,
 
 `เรารักเธอมาก
-รักเธอที่สุด`,
+รักเธอที่สุด
 
-`และการที่เรายังเลือกเธออยู่ตรงนี้
+และการที่เรายังเลือกเธออยู่ตรงนี้
 ไม่ใช่เพราะมันง่าย
 ไม่ใช่เพราะเราอยากได้อะไรจากเธอ
 แต่เพราะเราเห็นเป้าหมายของชีวิตเรา
@@ -119,46 +115,33 @@ Still choosing you…
 `เราขอบคุณเธอสำหรับทุกอย่างที่ผ่านมา
 ขอบคุณที่รักเรา
 ขอบคุณที่อยู่ข้างกัน
-และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
+และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้
 
-`สวัสดีปีใหม่นะงับ
+สวัสดีปีใหม่นะงับ
 เรารักเธอนะ
 นักการทูตคนเก่งของผม`
 ];
 
 function render() {
-  textEl.style.opacity = 0;
-  setTimeout(() => {
-    textEl.textContent = pages[index];
-    textEl.style.opacity = 1;
-  }, 200);
-
-  prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
-  nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+  text.textContent = pages[i];
+  prevBtn.style.visibility = i === 0 ? "hidden" : "visible";
+  nextBtn.textContent = i === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
-startBtn.onclick = () => {
-  intro.classList.add("hidden");
-  letter.classList.remove("hidden");
-  letter.classList.add("active");
-  index = 0;
-  render();
-};
-
 nextBtn.onclick = () => {
-  if (index < pages.length - 1) {
-    index++;
+  if (i < pages.length - 1) {
+    i++;
     render();
   } else {
-    letter.classList.add("hidden");
-    intro.classList.remove("hidden");
-    intro.classList.add("active");
+    window.location.href = "index.html";
   }
 };
 
 prevBtn.onclick = () => {
-  if (index > 0) {
-    index--;
+  if (i > 0) {
+    i--;
     render();
   }
 };
+
+render();
