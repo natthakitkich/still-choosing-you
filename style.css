@@ -1,5 +1,5 @@
 :root {
-  font-family: 'IBM Plex Sans Thai', system-ui, -apple-system;
+  font-family: 'LINE Seed Sans TH', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -9,18 +9,18 @@
 html, body {
   margin: 0;
   height: 100%;
-  color: #ffffff;
   background: #000;
+  color: #fff;
 }
 
 .background {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(1200px 600px at 20% 10%, #5b4bff55, transparent),
-    radial-gradient(800px 500px at 80% 30%, #c04bff44, transparent),
+    radial-gradient(900px 600px at 20% 15%, #5b5cff55, transparent),
+    radial-gradient(700px 500px at 80% 30%, #ff4fd855, transparent),
     linear-gradient(180deg, #050510, #000);
-  filter: blur(0);
+  z-index: -1;
 }
 
 .wrapper {
@@ -31,27 +31,30 @@ html, body {
   padding: 24px;
 }
 
-.glass {
+.card {
   width: 100%;
   max-width: 560px;
   padding: 40px 32px 32px;
   border-radius: 28px;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.glass {
   background: linear-gradient(
     160deg,
     rgba(255,255,255,0.18),
     rgba(255,255,255,0.08)
   );
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
   box-shadow:
     0 30px 80px rgba(0,0,0,0.45),
     inset 0 0 0 1px rgba(255,255,255,0.25);
-  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .fade-out {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(12px);
 }
 
 .fade-in {
@@ -61,18 +64,9 @@ html, body {
 
 .content {
   text-align: center;
-  line-height: 1.75;
+  line-height: 1.8;
   font-size: 17px;
-}
-
-.content h1 {
-  font-size: 26px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.content p {
-  margin: 0 0 16px;
+  white-space: pre-line;
 }
 
 .controls {
@@ -88,6 +82,7 @@ html, body {
   border: none;
   font-size: 16px;
   font-family: inherit;
+  cursor: pointer;
 }
 
 .btn.primary {
@@ -98,4 +93,9 @@ html, body {
 .btn.ghost {
   background: rgba(255,255,255,0.18);
   color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
