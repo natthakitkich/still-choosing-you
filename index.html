@@ -10,14 +10,19 @@
 </head>
 <body>
 
-  <!-- iOS Safari SAFE background -->
   <div class="ios-bg"></div>
 
   <main class="stage">
-    <div id="card" class="card fade-in">
+    <div id="card" class="card">
       <div id="content" class="content"></div>
 
-      <div class="nav">
+      <!-- ปุ่มหน้าเปิดการ์ด -->
+      <div id="startNav" class="nav">
+        <button id="startBtn" class="btn primary">เปิดการ์ด</button>
+      </div>
+
+      <!-- ปุ่มหน้าจดหมาย -->
+      <div id="pageNav" class="nav hidden">
         <button id="prev" class="btn ghost">ย้อนกลับ</button>
         <button id="next" class="btn primary">ถัดไป</button>
       </div>
