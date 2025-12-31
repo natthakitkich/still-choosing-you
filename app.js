@@ -1,7 +1,14 @@
-const pages = [
-`สวัสดีปีใหม่นะงับที่รัก`,
+const content = document.getElementById("content");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
-`ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
+let mode = "cover";
+let page = 0;
+
+const pages = [
+`สวัสดีปีใหม่นะงับที่รัก
+
+ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ
 และเราอยากบอกเธอจากใจว่า
 คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ`,
 
@@ -86,9 +93,10 @@ const pages = [
 ที่มีคำว่า “เรา” ทั้งคู่อยู่ในนั้น`,
 
 `เหมือนเพลงที่เราเขียน
-Still Choosing You…
+Still choosing you…
 เรายังเลือกเธอ
-วันนี้...พรุ่งนี้
+วันนี้
+พรุ่งนี้
 และในทุกวันที่เราจะเดินไปข้างหน้า
 เราก็ยังเลือกเธอนะ`,
 
@@ -110,40 +118,48 @@ Still Choosing You…
 ขอบคุณที่อยู่ข้างกัน
 และขอบคุณที่ทำให้ปีนี้ของเรามีความหมายขนาดนี้`,
 
-`สวัสดีปีใหม่นะงับ`,
-`เรารักเธอนะ`,
+`สวัสดีปีใหม่นะงับ
+เรารักเธอนะ`,
 `นักการทูตคนเก่งของผม`
 ];
 
-let index = 0;
-const textEl = document.getElementById("text");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-
 function render() {
-  textEl.classList.remove("show");
+  document.querySelector(".card").style.opacity = 0;
+
   setTimeout(() => {
-    textEl.textContent = pages[index];
-    textEl.classList.add("show");
-    prevBtn.disabled = index === 0;
-    nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
-  }, 200);
+    if (mode === "cover") {
+      content.innerHTML =
+`การ์ดใบนี้
+เขียนถึงคนคนเดียว
+
+กดเพื่อเปิดการ์ดปีใหม่`;
+      prevBtn.style.display = "none";
+      nextBtn.textContent = "เปิดการ์ดปีใหม่";
+    } else {
+      content.textContent = pages[page];
+      prevBtn.style.display = page === 0 ? "none" : "block";
+      nextBtn.textContent = page === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+    }
+
+    document.querySelector(".card").style.opacity = 1;
+  }, 500);
 }
 
-prevBtn.onclick = () => {
-  if (index > 0) {
-    index--;
-    render();
+nextBtn.onclick = () => {
+  if (mode === "cover") {
+    mode = "letter";
+    page = 0;
+  } else if (page < pages.length - 1) {
+    page++;
+  } else {
+    mode = "cover";
   }
+  render();
 };
 
-nextBtn.onclick = () => {
-  if (index < pages.length - 1) {
-    index++;
-    render();
-  } else {
-    window.location.href = "index.html";
-  }
+prevBtn.onclick = () => {
+  if (page > 0) page--;
+  render();
 };
 
 render();
