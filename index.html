@@ -2,45 +2,37 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Still choosing you</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>การ์ดปีใหม่</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="bg"></div>
-  <div class="particles"></div>
+<div id="app">
 
-  <main id="app">
+  <!-- หน้าแรก -->
+  <section id="cover" class="screen active">
+    <div class="glass card">
+      <h1>การ์ดใบนี้</h1>
+      <p class="subtitle">เขียนถึงคนคนเดียว</p>
+      <button id="startBtn" class="primary">เปิดการ์ดปีใหม่</button>
+    </div>
+  </section>
 
-    <!-- COVER -->
-    <section id="cover" class="screen active">
-      <div class="card">
-        <h1>การ์ดใบนี้</h1>
-        <p>เขียนถึงคนคนเดียว</p>
-        <button id="startBtn">เปิดการ์ดปีใหม่</button>
+  <!-- หน้าข้อความ -->
+  <section id="reader" class="screen">
+    <div class="glass card">
+      <div id="textContainer"></div>
+
+      <div class="nav">
+        <button id="prevBtn">ย้อนกลับ</button>
+        <button id="nextBtn" class="primary">ถัดไป</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTENT -->
-    <section id="content" class="screen">
-      <div class="card">
-        <div id="text"></div>
+</div>
 
-        <div class="nav">
-          <button id="prevBtn">ย้อนกลับ</button>
-          <button id="nextBtn">ถัดไป</button>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
