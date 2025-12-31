@@ -68,10 +68,8 @@ html, body {
     inset 0 0 0 1px rgba(255,255,255,.55),
     0 20px 60px rgba(0,0,0,.35);
 
-  /* ⭐ สำคัญมาก */
-  transition:
-    opacity 3s ease-in-out,
-    transform 3s ease-in-out;
+  /* ⭐ สำคัญ */
+  transition: opacity 3s ease, transform 3s ease;
 }
 
 /* ===== Text ===== */
@@ -114,10 +112,10 @@ html, body {
   color: #fff;
 }
 
-/* ===== Fade States ===== */
+/* ===== Fade states ===== */
 .fade-out {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(12px);
 }
 
 .fade-in {
