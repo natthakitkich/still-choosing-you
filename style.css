@@ -9,28 +9,33 @@ html, body {
   height: 100%;
   font-family: "Noto Sans Thai", -apple-system, system-ui, sans-serif;
   color: #fff;
-  background: #000;
   overflow: hidden;
 }
 
-/* ===== Liquid Background (FIX สีเพี้ยน iOS) ===== */
-.liquid-bg {
+/* ===== iOS SAFARI BACKGROUND (FIXED) ===== */
+.ios-bg {
   position: fixed;
-  inset: -30%;
+  inset: 0;
   background:
-    radial-gradient(800px at 20% 15%, rgba(110,90,255,.75), transparent 60%),
-    radial-gradient(700px at 80% 30%, rgba(190,100,255,.65), transparent 65%),
-    radial-gradient(600px at 50% 85%, rgba(80,200,200,.45), transparent 70%),
-    linear-gradient(180deg, #0a0d1f 0%, #05060c 100%);
-  filter: blur(60px) saturate(180%);
+    linear-gradient(
+      180deg,
+      #7c6cff 0%,
+      #8c6bff 35%,
+      #6f6bff 55%,
+      #2a2348 100%
+    );
   z-index: -2;
 }
 
-/* ===== Dust canvas ===== */
-#particles {
-  position: fixed;
+/* soft glow layer (NO blur) */
+.ios-bg::after {
+  content: "";
+  position: absolute;
   inset: 0;
-  z-index: -1;
+  background:
+    radial-gradient(80% 60% at 20% 10%, rgba(255,255,255,.25), transparent 60%),
+    radial-gradient(70% 50% at 80% 30%, rgba(255,150,255,.25), transparent 65%);
+  opacity: .85;
 }
 
 /* ===== Layout ===== */
@@ -45,50 +50,34 @@ html, body {
     env(safe-area-inset-bottom);
 }
 
-/* ===== Glass Card (Liquid Glass จริง) ===== */
+/* ===== Glass Card (iOS Control Center look) ===== */
 .card {
-  position: relative;
   width: 100%;
-  max-width: 340px;
-  padding: 32px 24px 26px;
-  border-radius: 28px;
+  max-width: 360px;
+  padding: 34px 26px 26px;
+  border-radius: 32px;
+  position: relative;
 
-  /* 🔑 สำคัญ: ใส่สีพื้น + gradient ซ้อน */
   background:
     linear-gradient(
       180deg,
-      rgba(130,120,255,0.35),
-      rgba(90,160,200,0.25)
+      rgba(255,255,255,0.35),
+      rgba(255,255,255,0.18)
     );
 
-  backdrop-filter: blur(55px) saturate(200%);
-  -webkit-backdrop-filter: blur(55px) saturate(200%);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.35),
-    inset 0 12px 28px rgba(255,255,255,0.15),
-    0 40px 90px rgba(0,0,0,0.75);
+    inset 0 0 0 1px rgba(255,255,255,0.55),
+    0 20px 60px rgba(0,0,0,.35);
 
-  overflow: hidden;
+  transition:
+    opacity .5s ease,
+    transform .5s ease;
 }
 
-/* Glass edge glow */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0.6),
-    rgba(255,255,255,0.05),
-    rgba(255,255,255,0.6)
-  );
-  opacity: .35;
-  pointer-events: none;
-}
-
-/* ===== Content ===== */
+/* ===== Text ===== */
 .content {
   font-size: 16px;
   line-height: 1.9;
@@ -113,11 +102,6 @@ html, body {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  transition: transform .2s ease, opacity .2s ease;
 }
 
 .btn.primary {
@@ -126,7 +110,7 @@ html, body {
 }
 
 .btn.ghost {
-  background: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.3);
   color: #fff;
 }
 
@@ -134,15 +118,13 @@ html, body {
   transform: scale(.96);
 }
 
-/* ===== Transitions ===== */
+/* ===== Fade ===== */
 .fade-out {
   opacity: 0;
   transform: translateY(10px);
-  filter: blur(10px);
 }
 
 .fade-in {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
