@@ -2,41 +2,44 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Still Choosing You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Still choosing you</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <!-- Google Font : Anuphan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="bg"></div>
+  <!-- Animated Gradient Background -->
+  <div class="bg"></div>
+  <div class="particles"></div>
 
-<div id="app">
+  <!-- App Container -->
+  <div id="app">
 
-  <!-- COVER PAGE -->
-  <div id="cover" class="page active">
-    <div class="glass">
+    <!-- Cover Screen -->
+    <div id="cover" class="card active">
       <h1>การ์ดใบนี้</h1>
       <p>เขียนถึงคนคนเดียว</p>
       <button id="startBtn">เปิดการ์ดปีใหม่</button>
     </div>
-  </div>
 
-  <!-- CONTENT PAGE -->
-  <div id="content" class="page">
-    <div class="glass content">
+    <!-- Content Screen -->
+    <div id="content" class="card hidden">
       <div id="text"></div>
 
       <div class="nav">
-        <button id="prevBtn">ย้อนกลับ</button>
+        <button id="prevBtn" disabled>ย้อนกลับ</button>
         <button id="nextBtn">ถัดไป</button>
       </div>
     </div>
+
   </div>
 
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
