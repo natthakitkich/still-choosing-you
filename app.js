@@ -75,25 +75,24 @@ Still choosing you…
 let index = 0;
 let locked = false;
 
-function showPage() {
+function render() {
   locked = true;
   pageEl.classList.remove("show");
 
   setTimeout(() => {
     pageEl.textContent = pages[index];
     pageEl.classList.add("show");
-    setTimeout(() => locked = false, 600);
+    setTimeout(() => locked = false, 700);
   }, 350);
 }
 
-showPage();
+render();
 
 document.body.addEventListener("click", () => {
   if (locked) return;
-
   if (index < pages.length - 1) {
     index++;
-    showPage();
+    render();
   } else {
     hintEl.textContent = "❤️";
     hintEl.style.opacity = "0.8";
