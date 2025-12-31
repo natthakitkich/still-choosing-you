@@ -73,22 +73,29 @@ Still choosing you…
 ];
 
 let index = 0;
+let locked = false;
 
 function showPage() {
+  locked = true;
   pageEl.classList.remove("show");
+
   setTimeout(() => {
     pageEl.textContent = pages[index];
     pageEl.classList.add("show");
-  }, 300);
+    setTimeout(() => locked = false, 600);
+  }, 350);
 }
 
 showPage();
 
 document.body.addEventListener("click", () => {
+  if (locked) return;
+
   if (index < pages.length - 1) {
     index++;
     showPage();
   } else {
     hintEl.textContent = "❤️";
+    hintEl.style.opacity = "0.8";
   }
 });
