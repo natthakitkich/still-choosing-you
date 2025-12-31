@@ -6,61 +6,33 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "IBM Plex Thai", sans-serif;
   background: #fafafa;
+  font-family: "IBM Plex Thai", sans-serif;
   color: #111;
 }
 
-/* Landing */
-.landing {
+#card {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 24px;
-}
-
-.landing-text {
-  font-size: 1.25rem;
-  line-height: 1.9;
-}
-
-#startBtn {
-  margin-top: 48px;
-  padding: 14px 28px;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 999px;
-  background: #111;
-  color: #fff;
-}
-
-/* Content */
-.hidden {
-  display: none;
-}
-
-main#content {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Pages */
 .page {
-  height: 100vh;
-  scroll-snap-align: start;
+  position: absolute;
+  inset: 0;
+  padding: 0 24px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 0 24px;
   text-align: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
 }
 
 .page p {
@@ -70,9 +42,13 @@ main#content {
   margin-bottom: 28px;
 }
 
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .page.emphasis p {
   font-size: 1.15rem;
-  font-weight: 400;
 }
 
 .page.ending p {
@@ -83,4 +59,26 @@ main#content {
   margin-top: 40px;
   font-size: 0.95rem;
   opacity: 0.6;
+}
+
+/* Buttons */
+#startBtn {
+  margin-top: 48px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+#nextBtn {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  opacity: 0.5;
 }
