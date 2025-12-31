@@ -1,60 +1,72 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
   height: 100%;
-  font-family: 'LINE Seed Sans TH', system-ui, -apple-system;
+  font-family: 'IBM Plex Sans Thai', system-ui, -apple-system;
   color: #fff;
   overflow: hidden;
 }
 
+/* Background (iOS 26 style) */
 .bg {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(1000px at 20% 10%, #6d5cff 0%, transparent 60%),
-    radial-gradient(800px at 80% 30%, #a855f7 0%, transparent 65%),
-    linear-gradient(180deg, #0a0d18, #04050b);
+    radial-gradient(1200px at 20% 15%, #7c6cff 0%, transparent 55%),
+    radial-gradient(900px at 80% 35%, #c084fc 0%, transparent 60%),
+    linear-gradient(180deg, #0a0b1a, #05060c);
   z-index: -2;
 }
 
+/* Particles */
 #particles {
   position: fixed;
   inset: 0;
   z-index: -1;
 }
 
+/* Layout */
 .stage {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
 }
 
+/* Liquid Glass Card */
 .glass-card {
   width: 100%;
   max-width: 720px;
-  padding: 56px 48px 44px;
-  border-radius: 36px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(48px) saturate(180%);
-  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  padding: 64px 52px 48px;
+  border-radius: 40px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+  backdrop-filter: blur(60px) saturate(180%);
+  -webkit-backdrop-filter: blur(60px) saturate(180%);
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,0.25),
-    0 40px 100px rgba(0,0,0,0.65);
+    0 50px 120px rgba(0,0,0,0.65);
 }
 
+/* Text */
 .content {
   font-size: 20px;
-  line-height: 1.85;
-  letter-spacing: 0.3px;
+  line-height: 1.9;
+  letter-spacing: 0.35px;
   text-align: center;
   white-space: pre-line;
   opacity: 0;
-  transform: translateY(10px);
-  filter: blur(6px);
-  transition: all 1.2s ease;
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition: all 1.4s cubic-bezier(.22,.61,.36,1);
 }
 
 .content.show {
@@ -63,18 +75,20 @@ html, body {
   filter: blur(0);
 }
 
+/* Navigation */
 .nav {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
 .btn {
   min-width: 160px;
-  padding: 16px 28px;
+  padding: 16px 30px;
   border-radius: 999px;
   border: none;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
