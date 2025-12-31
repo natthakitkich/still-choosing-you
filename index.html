@@ -5,24 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Still Choosing You</title>
 
-  <!-- LINE Seed Sans TH -->
+  <!-- Thai modern font (no head) -->
   <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+Sans+TH:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="background"></div>
+  <canvas id="particles"></canvas>
+  <div class="bg"></div>
 
-  <main class="wrapper">
-    <section id="card" class="card glass">
+  <main class="stage">
+    <div id="card" class="glass card fade-in">
       <div id="content" class="content"></div>
 
-      <div class="controls">
+      <div class="nav">
         <button id="prev" class="btn ghost">ย้อนกลับ</button>
         <button id="next" class="btn primary">ถัดไป</button>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="app.js"></script>
