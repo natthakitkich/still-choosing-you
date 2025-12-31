@@ -68,7 +68,20 @@ html, body {
     inset 0 0 0 1px rgba(255,255,255,.55),
     0 20px 60px rgba(0,0,0,.35);
 
-  transition: opacity .45s ease, transform .45s ease;
+  /* 🔑 Cross-fade animation */
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 2s cubic-bezier(.4,0,.2,1),
+    transform 2s cubic-bezier(.4,0,.2,1),
+    filter 2s cubic-bezier(.4,0,.2,1);
+}
+
+.card.fade {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
 }
 
 /* ===== Text ===== */
@@ -109,15 +122,4 @@ html, body {
 .btn.ghost {
   background: rgba(255,255,255,.3);
   color: #fff;
-}
-
-/* ===== Fade ===== */
-.fade-out {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
 }
