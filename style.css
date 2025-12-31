@@ -1,111 +1,94 @@
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "SF Pro Text", "Noto Sans Thai", Arial, sans-serif;
-  color: #f5f6fa;
-  background: #060817;
+  height: 100vh;
+  font-family: "LINE Seed Sans TH", system-ui, sans-serif;
+  color: white;
   overflow: hidden;
 }
 
-.bg {
+.background {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(900px at 20% 10%, #7b5cff55, transparent 60%),
-    radial-gradient(800px at 80% 30%, #ff6fb155, transparent 60%),
-    radial-gradient(700px at 50% 85%, #3ba9ff44, transparent 60%),
-    linear-gradient(180deg, #070a1f, #03040c);
-  animation: drift 18s ease-in-out infinite alternate;
-  z-index: -1;
-}
-
-@keyframes drift {
-  from { filter: hue-rotate(0deg); }
-  to { filter: hue-rotate(10deg); }
-}
-
-.container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.glass {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(26px) saturate(160%);
-  -webkit-backdrop-filter: blur(26px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 28px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 30px 80px rgba(0,0,0,0.5);
+    radial-gradient(60% 60% at 70% 20%, #b56cff55, transparent 60%),
+    radial-gradient(50% 50% at 20% 80%, #4fd1ff44, transparent 60%),
+    linear-gradient(120deg, #0b1020, #1b1140, #120a24);
+  filter: blur(0);
 }
 
 .card {
-  width: 100%;
-  max-width: 420px;
-  padding: 28px 24px;
+  position: relative;
+  max-width: 680px;
+  margin: 12vh auto;
+  padding: 48px 40px 40px;
 }
 
-.center {
-  text-align: center;
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.08)
+  );
+  backdrop-filter: blur(32px) saturate(160%);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
-  font-weight: 600;
+.page {
+  font-size: 20px;
+  line-height: 1.9;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  filter: blur(4px);
+  transition:
+    opacity 1.1s cubic-bezier(0.22,1,0.36,1),
+    transform 1.1s cubic-bezier(0.22,1,0.36,1),
+    filter 1.1s cubic-bezier(0.22,1,0.36,1);
 }
 
-.subtitle {
-  font-size: 15px;
-  opacity: 0.75;
-  margin-bottom: 24px;
+.page.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
-.letter {
-  font-size: 16px;
-  line-height: 1.75;
-  white-space: pre-line;
-  min-height: 260px;
-  margin-bottom: 24px;
-}
-
-.nav {
+.controls {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 40px;
 }
 
 .btn {
   flex: 1;
   padding: 14px 0;
+  font-size: 17px;
   border-radius: 999px;
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  transition: transform .25s ease, opacity .25s ease;
+  transition: all .35s ease;
 }
 
-.btn:active {
-  transform: scale(0.97);
-}
-
-.primary {
-  background: linear-gradient(180deg, #ffffff, #e6e8ee);
+.btn.primary {
+  background: rgba(255,255,255,0.9);
   color: #111;
 }
 
-.ghost {
+.btn.primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn.ghost {
   background: rgba(255,255,255,0.15);
-  color: #fff;
+  color: white;
+}
+
+.btn.ghost:hover {
+  background: rgba(255,255,255,0.25);
 }
