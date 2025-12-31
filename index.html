@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Still choosing you</title>
 
-  <!-- Google Font : Anuphan -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -14,31 +13,33 @@
 </head>
 <body>
 
-  <!-- Animated Gradient Background -->
   <div class="bg"></div>
   <div class="particles"></div>
 
-  <!-- App Container -->
-  <div id="app">
+  <main id="app">
 
-    <!-- Cover Screen -->
-    <div id="cover" class="card active">
-      <h1>การ์ดใบนี้</h1>
-      <p>เขียนถึงคนคนเดียว</p>
-      <button id="startBtn">เปิดการ์ดปีใหม่</button>
-    </div>
-
-    <!-- Content Screen -->
-    <div id="content" class="card hidden">
-      <div id="text"></div>
-
-      <div class="nav">
-        <button id="prevBtn" disabled>ย้อนกลับ</button>
-        <button id="nextBtn">ถัดไป</button>
+    <!-- COVER -->
+    <section id="cover" class="screen active">
+      <div class="card">
+        <h1>การ์ดใบนี้</h1>
+        <p>เขียนถึงคนคนเดียว</p>
+        <button id="startBtn">เปิดการ์ดปีใหม่</button>
       </div>
-    </div>
+    </section>
 
-  </div>
+    <!-- CONTENT -->
+    <section id="content" class="screen">
+      <div class="card">
+        <div id="text"></div>
+
+        <div class="nav">
+          <button id="prevBtn">ย้อนกลับ</button>
+          <button id="nextBtn">ถัดไป</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <script src="app.js"></script>
 </body>
