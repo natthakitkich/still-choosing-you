@@ -101,9 +101,9 @@ const pages = [
 Still Choosing You…`,
 
 `เรายังเลือกเธอ
-วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้าง`,
+วันนี้ พรุ่งนี้ และในทุกวันที่เราจะเดินไปข้างหน้า`,
 
-`หน้าเราก็ยังเลือกเธอนะ`,
+`เราก็ยังเลือกเธอนะ`,
 
 `สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่`,
 
@@ -125,38 +125,31 @@ Still Choosing You…`,
 `สวัสดีปีใหม่นะงับ
 เรารักเธอนะ`,
 
-`นักการทูตคนเก่งของเรา`
+`นักการทูตคนเก่งของผม <3`
 ];
 
 let index = 0;
+const card = document.getElementById("card");
+const content = document.getElementById("content");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
 
 function render() {
   content.textContent = pages[index];
-
-  prev.style.display = index === 0 ? "none" : "inline-block";
-  next.textContent = index === 0 ? "เปิดการ์ด" :
-                     index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+  prev.style.visibility = index === 0 ? "hidden" : "visible";
+  next.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
-function transition(to) {
+function go(to) {
   card.classList.add("fade-out");
   setTimeout(() => {
     index = to;
     render();
     card.classList.remove("fade-out");
-  }, 600);
+  }, 500);
 }
 
-prev.onclick = () => {
-  if (index > 0) transition(index - 1);
-};
-
-next.onclick = () => {
-  if (index < pages.length - 1) {
-    transition(index + 1);
-  } else {
-    transition(0);
-  }
-};
+prev.onclick = () => index > 0 && go(index - 1);
+next.onclick = () => index < pages.length - 1 ? go(index + 1) : go(0);
 
 render();
