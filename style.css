@@ -5,11 +5,17 @@
 html, body {
   margin: 0;
   height: 100%;
-  font-family: 'LINE Seed Sans TH', -apple-system, BlinkMacSystemFont, system-ui;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "SF Pro Display",
+    "Thonburi",
+    system-ui,
+    sans-serif;
   color: #fff;
   overflow: hidden;
 }
-
 /* ===== Background (iOS-like soft gradient) ===== */
 .bg {
   position: fixed;
