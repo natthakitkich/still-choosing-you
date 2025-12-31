@@ -1,148 +1,37 @@
-* {
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1,
+                 viewport-fit=cover" />
 
-html, body {
-  margin: 0;
-  height: 100%;
-  font-family:
-    "LINE Seed Sans TH",
-    -apple-system,
-    system-ui,
-    sans-serif;
-  color: #fff;
-  background: #000;
-  overflow: hidden;
-}
+  <title>Still Choosing You</title>
 
-/* ===== Background (Liquid Glass iOS tone) ===== */
-.bg {
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(900px at 15% 10%, #7b6cff 0%, transparent 60%),
-    radial-gradient(900px at 85% 35%, #c084fc 0%, transparent 65%),
-    linear-gradient(180deg, #0a0d18, #05060c);
-  z-index: -2;
-}
+  <!-- Thai modern no-head font (FOR iOS SAFARI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+Sans+TH:wght@300;400;600&display=swap" rel="stylesheet">
 
-/* ===== Particles ===== */
-#particles {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/* ===== Layout (iPhone-first only) ===== */
-.stage {
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding:
-    env(safe-area-inset-top)
-    16px
-    env(safe-area-inset-bottom);
-}
+  <canvas id="particles"></canvas>
+  <div class="bg"></div>
 
-/* ===== Glass Card (Control Center style) ===== */
-.card {
-  width: 100%;
-  max-width: 360px; /* iPhone width */
-  padding: 34px 26px 26px;
-  border-radius: 32px;
+  <main class="stage">
+    <section id="card" class="card fade-in">
+      <div id="content" class="content"></div>
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.35),
-      rgba(255,255,255,0.12)
-    );
+      <div class="nav">
+        <button id="prev" class="btn ghost">ย้อนกลับ</button>
+        <button id="next" class="btn primary">เปิดการ์ด</button>
+      </div>
+    </section>
+  </main>
 
-  backdrop-filter: blur(80px) saturate(240%);
-  -webkit-backdrop-filter: blur(80px) saturate(240%);
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.55),
-    inset 0 18px 30px rgba(255,255,255,0.25),
-    0 50px 100px rgba(0,0,0,0.7);
-
-  position: relative;
-  overflow: hidden;
-
-  transition:
-    opacity 0.9s ease,
-    transform 0.9s ease,
-    filter 0.9s ease;
-}
-
-/* ===== Liquid noise (จำเป็นมากบน iOS) ===== */
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-/* ===== Content ===== */
-.content {
-  font-size: 17px;
-  line-height: 1.9;
-  letter-spacing: 0.25px;
-  text-align: center;
-  white-space: pre-line;
-}
-
-/* ===== Navigation ===== */
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 22px;
-}
-
-/* ===== Buttons (Liquid Glass) ===== */
-.btn {
-  padding: 10px 22px;
-  min-width: 120px;
-  border-radius: 999px;
-  border: none;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
-
-  transition: all 0.25s ease;
-}
-
-.btn.primary {
-  background: rgba(255,255,255,0.95);
-  color: #000;
-}
-
-.btn.ghost {
-  background: rgba(255,255,255,0.28);
-  color: #fff;
-}
-
-.btn:active {
-  transform: scale(0.96);
-}
-
-/* ===== Page transition ===== */
-.fade-out {
-  opacity: 0;
-  transform: translateY(10px);
-  filter: blur(10px);
-}
-
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
+  <script src="app.js"></script>
+</body>
+</html>
