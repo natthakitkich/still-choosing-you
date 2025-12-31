@@ -1,41 +1,70 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Still choosing you</title>
+* {
+  box-sizing: border-box;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Thai", sans-serif;
+  background: radial-gradient(circle at top, #1c2040, #070a14);
+  color: #ffffff;
+}
 
-  <div class="bg"></div>
-  <div class="vignette"></div>
+.screen {
+  min-height: 100svh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  text-align: center;
+}
 
-  <audio id="bgMusic" preload="auto" playsinline>
-    <source src="music/still-choosing-you.mp3" type="audio/mpeg">
-  </audio>
+.screen.active {
+  display: flex;
+}
 
-  <main id="app">
+.card {
+  max-width: 520px;
+  width: 100%;
+  padding: 36px 28px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+}
 
-    <!-- หน้าแรก -->
-    <div class="page active" id="cover">
-      <div class="card">
-        <h1>การ์ดใบนี้</h1>
-        <p>เขียนถึงคนคนเดียว</p>
-        <button id="startBtn">เปิดการ์ดปีใหม่</button>
-      </div>
-    </div>
+h1 {
+  margin: 0 0 8px;
+  font-weight: 500;
+}
 
-    <!-- หน้าเนื้อหา (JS จะสร้างทั้งหมด) -->
-    <div class="page" id="content">
-      <div class="card" id="textBox"></div>
-      <div class="hint">แตะเพื่อไปต่อ</div>
-    </div>
+p {
+  margin: 0;
+  line-height: 1.8;
+}
 
-  </main>
+button {
+  margin-top: 28px;
+  padding: 14px 36px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #000;
+  font-size: 0.95rem;
+}
 
-  <script src="app.js"></script>
-</body>
-</html>
+#story {
+  flex-direction: column;
+}
+
+#text {
+  max-width: 520px;
+  white-space: pre-line;
+  line-height: 2;
+  font-size: 1.05rem;
+}
+
+.hint {
+  margin-top: 28px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
