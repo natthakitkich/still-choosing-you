@@ -1,88 +1,41 @@
-* { box-sizing: border-box; }
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Still choosing you</title>
 
-html, body {
-  margin: 0;
-  height: 100%;
-  font-family: "IBM Plex Thai", sans-serif;
-  background: #0a0c12;
-  color: #f5f7fa;
-}
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.bg {
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at top right, #2b1a3a, transparent 60%),
-    radial-gradient(circle at bottom left, #102a44, transparent 60%),
-    #0a0c12;
-}
+  <div class="bg"></div>
+  <div class="vignette"></div>
 
-.vignette {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.7));
-}
+  <audio id="bgMusic" preload="auto" playsinline>
+    <source src="music/still-choosing-you.mp3" type="audio/mpeg">
+  </audio>
 
-#app {
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
+  <main id="app">
 
-.page {
-  position: absolute;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-}
+    <!-- หน้าแรก -->
+    <div class="page active" id="cover">
+      <div class="card">
+        <h1>การ์ดใบนี้</h1>
+        <p>เขียนถึงคนคนเดียว</p>
+        <button id="startBtn">เปิดการ์ดปีใหม่</button>
+      </div>
+    </div>
 
-.page.active {
-  display: flex;
-  animation: fade 0.9s ease;
-}
+    <!-- หน้าเนื้อหา (JS จะสร้างทั้งหมด) -->
+    <div class="page" id="content">
+      <div class="card" id="textBox"></div>
+      <div class="hint">แตะเพื่อไปต่อ</div>
+    </div>
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+  </main>
 
-.card {
-  max-width: 520px;
-  width: 100%;
-  padding: 36px 28px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  text-align: center;
-}
-
-.card p {
-  font-size: 1.05rem;
-  line-height: 2;
-  white-space: pre-line;
-}
-
-h1 {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-}
-
-button {
-  margin-top: 28px;
-  padding: 14px 32px;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg,#ffffff,#cfd9ff);
-  color: #000;
-  font-size: 0.95rem;
-}
-
-.hint {
-  position: absolute;
-  bottom: 24px;
-  color: #9fbfff;
-  font-size: 0.85rem;
-}
+  <script src="app.js"></script>
+</body>
+</html>
