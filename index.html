@@ -2,17 +2,25 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Still choosing you</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Still Choosing You</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <!-- Thai modern rounded font -->
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div id="bg"></div>
+  <div id="app">
+    <div id="gradient-bg"></div>
 
-  <main id="stage"></main>
+    <div class="card">
+      <div id="text" class="fade"></div>
+
+      <button id="nextBtn">ถัดไป</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
