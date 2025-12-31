@@ -1,11 +1,13 @@
-const landing = document.getElementById("landing");
+const intro = document.getElementById("intro");
 const letter = document.getElementById("letter");
 const textEl = document.getElementById("text");
-const openBtn = document.getElementById("openCard");
-const nextBtn = document.getElementById("next");
-const prevBtn = document.getElementById("prev");
 
-/* LETTER CONTENT – ครบ 100% */
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+
+let index = 0;
+
 const pages = [
 `สวัสดีปีใหม่นะงับที่รัก`,
 
@@ -124,41 +126,39 @@ Still choosing you…
 นักการทูตคนเก่งของผม`
 ];
 
-let index = 0;
-
-/* Functions */
-function showPage() {
-  textEl.classList.remove("show");
+function render() {
+  textEl.style.opacity = 0;
   setTimeout(() => {
     textEl.textContent = pages[index];
-    textEl.classList.add("show");
+    textEl.style.opacity = 1;
   }, 200);
 
   prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
   nextBtn.textContent = index === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
 }
 
-/* Events */
-openBtn.onclick = () => {
-  landing.classList.remove("active");
+startBtn.onclick = () => {
+  intro.classList.add("hidden");
+  letter.classList.remove("hidden");
   letter.classList.add("active");
   index = 0;
-  showPage();
+  render();
 };
 
 nextBtn.onclick = () => {
   if (index < pages.length - 1) {
     index++;
-    showPage();
+    render();
   } else {
-    letter.classList.remove("active");
-    landing.classList.add("active");
+    letter.classList.add("hidden");
+    intro.classList.remove("hidden");
+    intro.classList.add("active");
   }
 };
 
 prevBtn.onclick = () => {
   if (index > 0) {
     index--;
-    showPage();
+    render();
   }
 };
