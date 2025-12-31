@@ -1,58 +1,53 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Still choosing you</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Thai:wght@300;400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Landing -->
-  <section class="landing">
-    <p class="landing-text">
-      การ์ดใบนี้<br>
-      เขียนถึงคนคนเดียว
-    </p>
-    <button id="startBtn">เปิดการ์ดปีใหม่</button>
-  </section>
-
-  <!-- Audio (iOS safe) -->
+  <!-- Audio (iOS Safari safe) -->
   <audio id="bgMusic" preload="auto" playsinline>
     <source src="music/still-choosing-you.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Pages -->
-  <main id="content" class="hidden">
+  <!-- Card -->
+  <main id="card">
 
-    <section class="page">
-      <p>สวัสดีปีใหม่นะงับที่รัก</p>
-    </section>
+    <div class="page active">
+      <p>การ์ดใบนี้<br>เขียนถึงคนคนเดียว</p>
+      <button id="startBtn">เปิดการ์ดปีใหม่</button>
+    </div>
 
-    <section class="page">
+    <!-- ===== เนื้อหาทั้งหมด (ไม่ตัด) ===== -->
+
+    <div class="page"><p>สวัสดีปีใหม่นะงับที่รัก</p></div>
+
+    <div class="page">
       <p>
         ปีนี้เป็นปีที่ดีมาก ๆ สำหรับเราเลยนะ<br>
         และเราอยากบอกเธอจากใจว่า<br>
         คนที่ทำให้เรารู้สึกแบบนั้นได้ คือเธอนะ
       </p>
-    </section>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         ถ้ามองย้อนกลับไปเธอคือคนแรก<br>
         และเป็นคนเดียวที่ทำให้เรากลับมามีพลังใจ<br>
         มีรอยยิ้ม<br>
         และค่อย ๆ กลับมารู้สึกว่าชีวิตมันเบาขึ้นมาก ๆ ในปีนี้
       </p>
-    </section>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         เราไม่เคยคิดเลยว่าตัวเองจะกลับมามีความสุขได้มากขนาดนี้
       </p>
@@ -64,20 +59,17 @@
       <p>
         และกลับมาเป็นเราในเวอร์ชันที่เราภูมิใจ
       </p>
-    </section>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         ซึ่งทั้งหมดนี้<br>
-        เราพูดได้เต็มปากว่ามันเกิดขึ้น<br>
-        เพราะมีเธออยู่ตรงนี้
+        เราพูดได้เต็มปากว่ามันเกิดขึ้นเพราะมีเธออยู่ตรงนี้
       </p>
-      <p>
-        ข้าง ๆ เรา
-      </p>
-    </section>
+      <p>ข้าง ๆ เรา</p>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         ปีนี้เราเดินมาด้วยกันหลายช่วงเวลามาก
       </p>
@@ -85,9 +77,9 @@
         เดือนมีนาคมยังชัดอยู่ในความทรงจำของเรา<br>
         วันที่เธอบินมาหาเราตามสัญญา
       </p>
-    </section>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         วันเกิดปีนี้ของเราทั้งคู่<br>
         เป็นวันที่เรามีความสุขมากจริง ๆ
@@ -97,9 +89,9 @@
         ได้หัวเราะ<br>
         ได้อยู่ด้วยกันแบบไม่ต้องรีบ
       </p>
-    </section>
+    </div>
 
-    <section class="page">
+    <div class="page">
       <p>
         หลังจากนั้นเราก็ตั้งใจทำตามสัญญาของเรา
       </p>
@@ -110,9 +102,9 @@
         มันเป็นการเดินทางไกลที่สุด<br>
         และมีความสุขที่สุดในชีวิตเรา
       </p>
-    </section>
+    </div>
 
-    <section class="page emphasis">
+    <div class="page emphasis">
       <p>Still choosing you…</p>
       <p>
         เรายังเลือกเธอ<br>
@@ -120,16 +112,19 @@
         พรุ่งนี้<br>
         และทุกวันที่เราจะเดินไปข้างหน้า
       </p>
-    </section>
+    </div>
 
-    <section class="page ending">
+    <div class="page ending">
       <p>สวัสดีปีใหม่นะงับ</p>
       <p>
         เรารักเธอนะ<br>
         นักการทูตคนเก่งของผม
       </p>
       <span class="signature">— Bubee</span>
-    </section>
+    </div>
+
+    <!-- ปุ่มไปหน้าถัดไป -->
+    <button id="nextBtn">แตะเพื่อไปต่อ</button>
 
   </main>
 
