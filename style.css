@@ -68,20 +68,10 @@ html, body {
     inset 0 0 0 1px rgba(255,255,255,.55),
     0 20px 60px rgba(0,0,0,.35);
 
-  /* 🔑 Cross-fade animation */
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+  /* ⭐ สำคัญมาก */
   transition:
-    opacity 2s cubic-bezier(.4,0,.2,1),
-    transform 2s cubic-bezier(.4,0,.2,1),
-    filter 2s cubic-bezier(.4,0,.2,1);
-}
-
-.card.fade {
-  opacity: 0;
-  transform: translateY(14px);
-  filter: blur(6px);
+    opacity 3s ease-in-out,
+    transform 3s ease-in-out;
 }
 
 /* ===== Text ===== */
@@ -122,4 +112,15 @@ html, body {
 .btn.ghost {
   background: rgba(255,255,255,.3);
   color: #fff;
+}
+
+/* ===== Fade States ===== */
+.fade-out {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
