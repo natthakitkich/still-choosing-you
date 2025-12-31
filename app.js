@@ -11,9 +11,7 @@ const bgm = document.getElementById("bgm");
 
 let pageIndex = -1;
 
-/* ===============================
-   ข้อความต้นฉบับ 100%
-   =============================== */
+/* ===== ข้อความ (ของคุณครบ 100%) ===== */
 const rawText = `
 สวัสดีปีใหม่นะงับที่รัก
 
@@ -119,7 +117,7 @@ Still choosing you…
 เราก็ยังเลือกเธอนะ
 
 สุดท้ายขอให้ปีใหม่นี้เป็นปีที่ดีสำหรับเราทั้งคู่
-ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ 
+ขอให้เราทั้งคู่มีสติ มีความเข้มแข็ง และเจอแต่สิ่งดี ๆ
 
 และถ้าวันไหนต้องเจอเรื่องไม่ดี ก็ขอให้เรายังจับมือกันแน่น ๆ
 และก้าวข้ามมันไปด้วยกัน
@@ -139,12 +137,10 @@ Still choosing you…
 นักการทูตคนเก่งของชั้น
 `;
 
-/* แยกหน้า */
 const pages = rawText.trim().split(/\n\s*\n/);
 
 /* ===== หน้าแรก ===== */
 function showStart() {
-  pageIndex = -1;
   content.textContent =
 `การ์ดใบนี้
 เขียนถึงคนคนเดียว
@@ -153,36 +149,33 @@ function showStart() {
 
   startNav.classList.remove("hidden");
   pageNav.classList.add("hidden");
-
-  nextBtn.textContent = "ถัดไป";
+  card.classList.remove("fade-out");
+  card.classList.add("fade-in");
 }
 
-/* ===== Cross-fade render ===== */
+/* ===== Render with 3s fade ===== */
 function renderPage() {
-  card.classList.add("fade");
+  card.classList.remove("fade-in");
+  card.classList.add("fade-out");
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      content.textContent = pages[pageIndex];
-      card.classList.remove("fade");
+  setTimeout(() => {
+    content.textContent = pages[pageIndex];
 
-      if (pageIndex === pages.length - 1) {
-        nextBtn.textContent = "จบแล้ว";
-      } else {
-        nextBtn.textContent = "ถัดไป";
-      }
-    });
-  });
+    card.classList.remove("fade-out");
+    card.classList.add("fade-in");
+
+    nextBtn.textContent =
+      pageIndex === pages.length - 1 ? "จบแล้ว" : "ถัดไป";
+  }, 3000);
 }
 
 /* ===== Init ===== */
 showStart();
 
-/* ===== Start ===== */
 startBtn.onclick = () => {
+  // เพลง (ไม่กระทบของเดิม)
   bgm.volume = 0;
   bgm.play().catch(() => {});
-
   let v = 0;
   const fadeIn = setInterval(() => {
     v += 0.02;
@@ -196,17 +189,16 @@ startBtn.onclick = () => {
   renderPage();
 };
 
-/* ===== Next ===== */
 nextBtn.onclick = () => {
   if (pageIndex < pages.length - 1) {
     pageIndex++;
     renderPage();
   } else {
+    pageIndex = -1;
     showStart();
   }
 };
 
-/* ===== Prev ===== */
 prevBtn.onclick = () => {
   if (pageIndex > 0) {
     pageIndex--;
