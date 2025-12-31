@@ -58,31 +58,59 @@ const pages = [
 
 let index = 0;
 
-/* ===== Render ===== */
+const card = document.getElementById("card");
+const content = document.getElementById("content");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+
 function render() {
-  content.classList.add("fade-out");
-
-  setTimeout(() => {
-    content.textContent = pages[index];
-    content.classList.remove("fade-out");
-  }, 250);
-
-  prevBtn.style.display = index === 0 ? "none" : "inline-block";
-  nextBtn.textContent = index === 0 ? "เปิดการ์ด" : "ถัดไป";
+  content.textContent = pages[index];
+  prev.style.display = index === 0 ? "none" : "inline-block";
+  next.textContent = index === 0 ? "เปิดการ์ด" : "ถัดไป";
 }
 
-prevBtn.onclick = () => {
-  if (index > 0) {
-    index--;
+function go(to) {
+  card.classList.add("fade-out");
+  setTimeout(() => {
+    index = to;
     render();
-  }
-};
+    card.classList.remove("fade-out");
+  }, 500);
+}
 
-nextBtn.onclick = () => {
-  if (index < pages.length - 1) {
-    index++;
-    render();
-  }
-};
+prev.onclick = () => index > 0 && go(index - 1);
+next.onclick = () => index < pages.length - 1 && go(index + 1);
 
 render();
+
+/* ===== Dust (iOS safe) ===== */
+const canvas = document.getElementById("dust");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const dots = Array.from({ length: 40 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.2 + 0.4,
+  s: Math.random() * 0.25 + 0.05
+}));
+
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  dots.forEach(d => {
+    d.y -= d.s;
+    if (d.y < -10) d.y = canvas.height + 10;
+    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
