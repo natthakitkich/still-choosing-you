@@ -5,19 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Still choosing you</title>
 
-  <!-- Thai modern rounded font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Thai rounded modern font -->
+  <link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div id="app">
-    <div id="page"></div>
-    <div id="hint">แตะหน้าจอเพื่อไปต่อ</div>
-  </div>
+  <div id="bg"></div>
+
+  <main id="stage">
+    <div class="scene active">
+      <h1>การ์ดใบนี้</h1>
+      <p>เขียนถึงคนคนเดียว</p>
+      <span class="hint">แตะเพื่อไปต่อ</span>
+    </div>
+  </main>
 
   <script src="app.js"></script>
 </body>
